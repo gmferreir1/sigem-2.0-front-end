@@ -1,7 +1,7 @@
 <template>
 
   <div class="panel" v-loading="load_data" element-loading-text="Carregando dados, aguarde ...">
-    
+
     <div class="panel-heading">
       Total de Usuários: ({{users.length}})
     </div>
