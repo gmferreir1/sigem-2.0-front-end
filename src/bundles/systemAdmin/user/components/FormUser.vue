@@ -13,7 +13,7 @@
 
           <div class="col-md-5" :class="{error: validation.hasError('form.name'), 'has-error': validation.hasError('form.name')}">
             <label>Nome <span class="required">*</span></label>
-            <input type="text" class="form-control input-sm" v-model="form.name">
+            <input type="text" class="form-control input-sm" v-model="form.name" ref="name">
             <div class="message">{{ validation.firstError('form.name') }}</div>
           </div>
 
@@ -26,8 +26,8 @@
           <div class="col-md-2" :class="{error: validation.hasError('form.type_profile'), 'has-error': validation.hasError('form.type_profile')}">
             <label>Perfil <span class="required">*</span></label>
             <select value="" class="form-control input-sm" v-model="form.type_profile">
-              <option value="">Admin</option>
-              <option value="">Normal</option>
+              <option value="admin">Admin</option>
+              <option value="normal">Normal</option>
             </select>
             <div class="message">{{ validation.firstError('form.type_profile') }}</div>
           </div>
@@ -35,8 +35,8 @@
           <div class="col-md-2" :class="{error: validation.hasError('form.status'), 'has-error': validation.hasError('form.status')}">
             <label>Status <span class="required">*</span></label>
             <select value="" class="form-control input-sm" v-model="form.status">
-              <option value="">Ativo</option>
-              <option value="">Inativo</option>
+              <option value="1">Ativo</option>
+              <option value="0">Inativo</option>
             </select>
             <div class="message">{{ validation.firstError('form.status') }}</div>
           </div>
@@ -47,7 +47,7 @@
 
           <div class="col-md-3" :class="{error: validation.hasError('form.email'), 'has-error': validation.hasError('form.email')}">
             <label>Email <span class="required">*</span></label>
-            <input type="text" class="form-control input-sm" v-model="form.email">
+            <input type="text" class="form-control input-sm" v-model="form.email" :disabled="disabledFields">
             <div class="message">{{ validation.firstError('form.email') }}</div>
           </div>
 
@@ -69,6 +69,8 @@
 
           <div class="col-md-2">
             <button class="button btn btn-danger btn-sm" type="submit">Salvar Dados</button>
+
+            <button class="button btn btn-default btn-sm" type="button" v-if="form.id" @click="cleanForm">Limpar Formulário</button>
           </div>
 
         </div>
@@ -90,6 +92,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+import {wordUpper} from '@/util/stringHelpers'
 export default {
   data () {
     return {
@@ -97,8 +101,8 @@ export default {
       form: {
         name: '',
         last_name: '',
-        type_profile: '',
-        status: '',
+        type_profile: 'normal',
+        status: '1',
         email: '',
         password: '',
         password_confirmation: ''
@@ -129,6 +133,7 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Auth', ['getAllUsers']),
     submitForm () {
       const self = this
       this.$validate()
@@ -144,10 +149,82 @@ export default {
     },
     save () {
       this.load_data = true
+
+      http.post('user', this.form).then(res => {
+        _notification.success()
+
+        this.cleanForm()
+        this.getAllUsers()
+
+        _notification.success()
+        this.$refs.name.focus()
+
+        setTimeout(() => {
+          this.load_data = false
+        }, 600)
+
+      }).catch(() => {
+        setTimeout(() => {
+          this.load_data = false
+        }, 300)
+      })
+
+    },
+    edit (dataEdit) {
+      dataEdit.name = wordUpper(dataEdit.name)
+      dataEdit.last_name = wordUpper(dataEdit.last_name)
+
+      dataEdit.password = 'no_change_password'
+      dataEdit.password_confirmation = 'no_change_password'
+      this.form = dataEdit
     },
     update () {
+      this.load_data = true
+      http.put(`user/${this.form.id}`, this.form).then(res => {
+        _notification.success()
 
+        this.cleanForm()
+        this.getAllUsers()
+
+        setTimeout(() => {
+          this.load_data = false
+        }, 600)
+
+      }).catch(() => {
+        setTimeout(() => {
+          this.load_data = false
+        }, 300)
+      })
+    },
+    cleanForm () {
+
+      this.form = {
+        name: '',
+        last_name: '',
+        type_profile: 'normal',
+        status: '1',
+        email: '',
+        password: '',
+        password_confirmation: ''
+      }
+
+      this.validation.reset()
     }
+  },
+  computed: {
+    disabledFields () {
+      if (this.form.id) {
+        return true
+      }
+
+      return false
+    }
+  },
+  mounted () {
+    this.$bus.$on('SystemAdmin\User:Edit', data => {
+      const dataEdit = Object.assign({}, data)
+      this.edit(dataEdit)
+    })
   }
 }
 </script>

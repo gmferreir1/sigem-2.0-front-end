@@ -14,3 +14,10 @@ Vue.use(ElementUI, { locale })
 const SimpleVueValidation = require('simple-vue-validator')
 window.Validator = SimpleVueValidation.Validator
 Vue.use(SimpleVueValidation)
+
+
+
+/*
+ * CollectJs
+ */
+window.collect = require('collect.js')

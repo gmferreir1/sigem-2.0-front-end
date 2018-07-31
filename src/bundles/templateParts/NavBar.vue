@@ -189,7 +189,6 @@
           destroyScrollbars();
         }
         else if ($(window).width() > 768 && !psTarg.hasClass('ps-container')) {
-          console.log('init');
           initScrollbars();
         }
       });
@@ -292,6 +291,7 @@
       mainPanel.on('click', function (e) {
         var target = e.target;
 
+
         if (isOffscreenOpen && target !== offscreenToggleBtn) {
           toggleMenu();
         }
@@ -391,6 +391,19 @@
       }, 300);
 
       window.addEventListener('resize', watchScrollbars);
+
+      /**
+       * Resize Menu
+       */
+      $(window).resize(() => {
+        if ($(window).width() <= 1024) {
+          app.addClass('layout-small-menu')
+        }
+
+        if ($(window).width() > 1024) {
+          app.removeClass('layout-small-menu')
+        }
+      })
     }
   }
 </script>
