@@ -1,0 +1,28 @@
+
+.required {
+  color: red;
+  font-size: 12px;
+}
+
+.error {
+  color: red;
+}
+
+/*
+ * font awesome icon
+ */
+.size-icon-table {
+  font-size: 14px;
+}
+
+/*
+ * Alterar cor THEAD da tabela
+ */
+.table > thead > tr > th,
+.table > thead > tr > td {
+  border-bottom: 0;
+  letter-spacing: 1px;
+  padding: 8px;
+  background: rgba(73, 84, 105, 0.8);
+  color: #ffffff;
+}

@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import Auth from '@/bundles/auth/store'
+import Auth from '@/bundles/systemAdmin/user/store'
 
 const modules = {
   Auth

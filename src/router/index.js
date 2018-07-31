@@ -6,8 +6,15 @@ const checkIsLogged = require('@/util/checkIsLogged')
 /*
  * Autenticação component
  */
-import Auth from '@bundles/auth//page/Main'
+import Auth from '@bundles/auth/page/Main'
 
+
+/*
+ * Administração do Sistema
+ */
+import SystemAdmin from '@bundles/systemAdmin/Main'
+import SystemAdmin_Dashboard from '@bundles/systemAdmin/dashboard/page/Main'
+import SystemAdmin_User from '@bundles/systemAdmin/user/page/Main'
 
 /*
  * Dashboard
@@ -28,6 +35,23 @@ const router = new Router({
       path: '/',
       name: 'dashboard',
       component: Dashboard
+    },
+    {
+      path: '/system-admin',
+      name: 'systemAdmin',
+      component: SystemAdmin,
+      children: [
+        {
+          path: 'dashboard',
+          name: 'systemAdmin.Dashboard',
+          component: SystemAdmin_Dashboard
+        },
+        {
+          path: 'user',
+          name: 'systemAdmin.User',
+          component: SystemAdmin_User
+        }
+      ]
     }
   ]
 })
@@ -35,7 +59,6 @@ const router = new Router({
 // protected route
 router.beforeEach((to, from, next) => {
 
-  console.log(to)
   if (to.name != 'auth' && checkIsLogged.check()) {
     next()
   } else if (to.name === 'auth') {

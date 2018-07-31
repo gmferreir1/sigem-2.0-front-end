@@ -131,6 +131,7 @@ export default {
   @import './assets/styles/animate.css';
   @import './assets/styles/urban.css';
   @import './assets/styles/urban.skins.css';
+  @import './assets/styles/my-style.css';
 
   .min-height {
     min-height: calc(100vh - 57px) !important

@@ -106,7 +106,9 @@
         </a>
         <ul class="dropdown-menu">
           <li>
-            <a href="javascript:;">Settings</a>
+            <router-link :to="{name: 'systemAdmin.Dashboard'}">
+              Admin Sistema
+            </router-link>
           </li>
           <li>
             <a href="javascript:;">Upgrade</a>
@@ -121,7 +123,7 @@
             <a href="javascript:;">Help</a>
           </li>
           <li>
-            <a href="signin.html">Logout</a>
+            <a href="#" @click.prevent="logoutSystem">Logout</a>
           </li>
         </ul>
 
@@ -138,6 +140,17 @@
   </header>
 
 </template>
+
+<script>
+  export default {
+    methods: {
+      logoutSystem () {
+        localStorage.clear()
+        window.location.href = '/'
+      }
+    }
+  }
+</script>
 
 <style>
 
