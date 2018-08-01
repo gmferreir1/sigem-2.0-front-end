@@ -117,6 +117,13 @@ export default {
 
       this.show_template_parts = true
     }
+  },
+  mounted () {
+    const channel = this.$pusher.subscribe('systemAction')
+
+    channel.bind('App\\Events\\SystemAction', () => {
+      console.log('opa')
+    })
   }
 }
 </script>

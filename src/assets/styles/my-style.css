@@ -30,3 +30,8 @@
 .success {
   color: green;
 }
+
+.bg-orange {
+  color: white;
+  background-color: #E98531;
+}

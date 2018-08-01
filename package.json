@@ -18,10 +18,13 @@
     "element-ui": "^2.4.5",
     "font-awesome": "4.3.0",
     "jquery": "^3.3.1",
+    "moment": "^2.22.2",
     "perfect-scrollbar": "^1.4.0",
+    "pusher-js": "^4.2.2",
     "simple-vue-validator": "^0.15.1",
     "toastr": "^2.1.4",
     "vue": "^2.5.2",
+    "vue-pusher": "^0.2.1",
     "vue-router": "^3.0.1",
     "vuex": "^3.0.1"
   },

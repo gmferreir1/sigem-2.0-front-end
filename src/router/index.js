@@ -15,6 +15,7 @@ import Auth from '@bundles/auth/page/Main'
 import SystemAdmin from '@bundles/systemAdmin/Main'
 import SystemAdmin_Dashboard from '@bundles/systemAdmin/dashboard/page/Main'
 import SystemAdmin_User from '@bundles/systemAdmin/user/page/Main'
+import SystemAdmin_UpdateDatabase from '@bundles/systemAdmin/updateDatabase/page/Main'
 
 /*
  * Dashboard
@@ -50,6 +51,11 @@ const router = new Router({
           path: 'user',
           name: 'systemAdmin.User',
           component: SystemAdmin_User
+        },
+        {
+          path: 'update-database',
+          name: 'systemAdmin.UpdateDatabase',
+          component: SystemAdmin_UpdateDatabase
         }
       ]
     }

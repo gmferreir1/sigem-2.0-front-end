@@ -16,8 +16,28 @@ window.Validator = SimpleVueValidation.Validator
 Vue.use(SimpleVueValidation)
 
 
-
 /*
  * CollectJs
  */
 window.collect = require('collect.js')
+
+
+/*
+ * moment js
+ */
+window.moment = require('moment')
+
+
+/*
+ * Pusher
+ */
+
+const vuePuser = require('vue-pusher')
+
+Vue.use(vuePuser, {
+  api_key: '2055475654b3ab243607',
+  options: {
+    cluster: 'eu',
+    encrypted: true,
+  }
+})
