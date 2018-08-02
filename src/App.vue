@@ -74,6 +74,10 @@
 
 
 
+    <!-- modal Sicadi data -->
+    <modal-sicadi-show-data />
+    <!-- / modal Sicadi data -->
+
 
   </div>
 </template>
@@ -85,6 +89,7 @@ import TopHeader from '@bundles/templateParts/TopHeader'
 import NavBar from '@bundles/templateParts/NavBar'
 import FooterPage from '@bundles/templateParts/FooterPage'
 import RightMenu from '@bundles/templateParts/RightMenu'
+import ModalSicadiShowData from '@bundles/sicadi/components/ModalSicadiShowData'
 
 export default {
   components: {
@@ -92,7 +97,8 @@ export default {
     TopHeader,
     NavBar,
     FooterPage,
-    RightMenu
+    RightMenu,
+    ModalSicadiShowData
   },
   name: 'App',
   data () {

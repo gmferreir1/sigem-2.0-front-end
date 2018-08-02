@@ -1,0 +1,25 @@
+<template>
+
+  <div class="modal-footer">
+    <div class="row">
+      <div class="col-sm-12">
+        &nbsp;
+      </div>
+    </div>
+  </div>
+
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+  .modal-footer {
+    padding-top: 4px;
+    padding-bottom: 4px;
+    background-color: rgba(215,132,66,.9);
+  }
+</style>

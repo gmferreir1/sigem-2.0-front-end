@@ -22,6 +22,12 @@ import SystemAdmin_UpdateDatabase from '@bundles/systemAdmin/updateDatabase/page
  */
 import Dashboard from '@/bundles/dashboard/page/Main'
 
+/*
+ * Rescisão
+ */
+import Termination from '@bundles/termination/Main'
+import Termination_Contract from '@bundles/termination/contract/page/Main'
+
 
 Vue.use(Router)
 
@@ -37,6 +43,24 @@ const router = new Router({
       name: 'dashboard',
       component: Dashboard
     },
+    /**
+     * Rescisão de contrato
+     */
+    {
+      path: '/termination',
+      name: 'termination',
+      component: Termination,
+      children: [
+        {
+          path: 'contract',
+          name: 'termination.Contract',
+          component: Termination_Contract
+        }
+      ]
+    },
+    /**
+     * Administração do sistema
+     */
     {
       path: '/system-admin',
       name: 'systemAdmin',

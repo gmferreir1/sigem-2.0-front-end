@@ -35,3 +35,24 @@
   color: white;
   background-color: #E98531;
 }
+
+.div-120 {
+  width: 120px;
+}
+
+.div-140 {
+  width: 140px;
+}
+
+label {
+  margin-bottom: 1px;
+}
+
+/*
+ * modals
+ */
+@media (min-width: 768px) {
+  .modal-xl {
+    width: 99%;
+  }
+}

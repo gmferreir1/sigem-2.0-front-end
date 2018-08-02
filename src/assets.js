@@ -29,6 +29,33 @@ window.moment = require('moment')
 
 
 /*
+ * Bootstrap Select Multiple
+ */
+require('../node_modules/bootstrap-multiselect/dist/js/bootstrap-multiselect')
+require('../node_modules/bootstrap-multiselect/dist/css/bootstrap-multiselect.css')
+
+
+/*
+ * Vue the mask
+ */
+import VueTheMask from 'vue-the-mask'
+Vue.use(VueTheMask)
+
+/*
+ * v-money
+ */
+
+import money from 'v-money'
+Vue.use(money, {
+  decimal: ',',
+  thousands: '.',
+  prefix: 'R$ ',
+  precision: 2,
+  masked: false
+})
+
+
+/*
  * Pusher
  */
 

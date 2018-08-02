@@ -1,4 +1,4 @@
-require('jquery')
+window.$ = window.jQuery = require('jquery')
 require('./assets/vendor/bootstrap/dist/js/bootstrap.js')
 require('./assets/vendor/jquery.easing/jquery.easing.js')
 require('./assets/vendor/fastclick/lib/fastclick.js')
@@ -14,4 +14,11 @@ require('./assets/scripts/ui/preloader.js')
 require('./assets/scripts/ui/toggle.js')
 require('./assets/scripts/urban-constants.js')
 require('./assets/scripts/extentions/lib.js')
+
+
+/*
+ * Date picker
+ */
+require('./assets/scripts/jquery-ui.min')
+require('./assets/styles/jquery-bootstrap-datepicker.css')
 

@@ -15,19 +15,28 @@
       <!-- maps -->
       <li>
         <a href="javascript:;">
-          <i class="fa fa-map-marker"></i>
-          <span>Maps</span>
-          <span class="label label-success pull-right">2</span>
+          <i class="fa fa-file"></i>
+          <span>Rescisão</span>
         </a>
         <ul class="sub-menu">
           <li>
             <a href="map-google.html">
-              <span>Google Maps</span>
+              <span>Notificações</span>
+            </a>
+          </li>
+          <li>
+            <router-link :to="{name: 'termination.Contract'}">
+              <span>Contratos</span>
+            </router-link>
+          </li>
+          <li>
+            <a href="map-vector.html">
+              <span>Arquivo Morto</span>
             </a>
           </li>
           <li>
             <a href="map-vector.html">
-              <span>Vector Maps</span>
+              <span>Imóveis Liberados</span>
             </a>
           </li>
         </ul>
