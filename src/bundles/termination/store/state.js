@@ -1,3 +1,4 @@
 export default {
-  destination_or_reason:[]
+  destination_or_reason:[],
+  all_responsible:[]
 }

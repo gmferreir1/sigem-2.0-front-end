@@ -1,6 +1,6 @@
 <template>
 
-  <div v-loading="load_data" element-loading-text="Carregando dados, aguarde ...">
+  <div v-loading="load_data" :element-loading-text="text_load">
     <div class="table-responsive">
       <table class="table table-striped table-bordered table-hover table-condensed">
         <thead>
@@ -26,6 +26,10 @@
             <a href="" @click.prevent="edit(list)">
               <i class="fa fa-pencil size-icon-table"></i>
             </a>
+
+            <a href="" @click.prevent="remove(list.id)" style="margin-left: 5px">
+              <i class="fa fa-trash size-icon-table"></i>
+            </a>
           </td>
         </tr>
         </tbody>
@@ -49,6 +53,7 @@ export default {
   data () {
     return {
       load_data: false,
+      text_load: 'Carregando dados, aguarde ...',
       data_list: {
         data: []
       }
@@ -59,6 +64,25 @@ export default {
     wordUpper,
     edit (data) {
       this.$bus.$emit('Termination\DestinationOrReason:Edit', data)
+    },
+    remove (id) {
+      this.text_load = 'Processando sua solicitação, aguarde ...'
+      this.load_data = true
+
+      http.delete(`termination/destination-or-reason/${id}`).then(res => {
+
+        if (res.data.success) {
+          _notification.success()
+          this.getDestinationAndReason()
+        }
+
+        setTimeout(() => {
+          this.load_data = false
+        }, 600)
+
+      }).catch(() => {
+        this.load_data = false
+      })
     }
   },
   computed: {
@@ -66,7 +90,7 @@ export default {
   },
   watch: {
     modalOpened () {
-
+      this.text_load = 'Carregando dados, aguarde ...'
       this.load_data = true
 
       this.getDestinationAndReason().then(res => {

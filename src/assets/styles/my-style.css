@@ -36,6 +36,14 @@
   background-color: #E98531;
 }
 
+.orange {
+  color: #E98531;
+}
+
+.red {
+  color: red;
+}
+
 .div-120 {
   width: 120px;
 }
@@ -55,4 +63,63 @@ label {
   .modal-xl {
     width: 99%;
   }
+}
+
+/*
+ * modals
+ */
+@media (min-width: 768px) {
+  .modal-md {
+    width: 70%;
+  }
+}
+
+/* chosen select */
+.chosen-drop .chosen-results {
+  max-height: 150px;
+}
+
+
+.h-row {
+  margin-top: 0px !important;
+  width: 90%;
+}
+
+.title-form {
+  font-weight: bold;
+  margin-top: 10px;
+  color: #E98531;
+}
+
+.main-panel > .main-content {
+  padding: 5px;
+  padding-top: 60px;
+  margin-bottom: 55px;
+}
+
+::-webkit-scrollbar {
+  width: 0.3em;
+  height: 0.3em
+}
+::-webkit-scrollbar-button {
+  background: #ccc
+}
+::-webkit-scrollbar-track-piece {
+  background: #888
+}
+::-webkit-scrollbar-thumb {
+  background: #eee
+}
+
+
+p {
+  margin-bottom: 0px !important;
+}
+
+
+.el-loading-spinner {
+  top: 30% !important;
+  width: 100% !important;
+  text-align: center !important;
+  position: absolute !important;
 }

@@ -6703,7 +6703,7 @@ ul.wysihtml5-toolbar .dropdown-menu {
  ------------------------------------------*/
 .chosen-container .chosen-single,
 .chosen-container .chosen-choices {
-  border-color: #e4e4e4;
+  border-color: #e4e4e4 !important;
   -webkit-border-radius: 2px;
   -moz-border-radius: 2px;
   border-radius: 2px;
@@ -6717,7 +6717,7 @@ ul.wysihtml5-toolbar .dropdown-menu {
   -webkit-appearance: none;
   font-weight: 400;
   font-size: 13px;
-  min-height: 34px;
+  min-height: 30px;
   padding: 6px 12px;
   line-height: 1.42857143;
   color: #616161;

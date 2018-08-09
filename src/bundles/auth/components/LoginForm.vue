@@ -69,8 +69,8 @@
 
         const data = {
           grant_type: 'password',
-          client_secret: 'a537PXPdYTgUpwPiCVNCiFilRFRHCYvA1Lsd1wuK',
-          client_id: 3,
+          client_secret: 'HNacujglNrlaUm059gOMInmD5fXZtmZCIn3Vphlo',
+          client_id: 2,
           username: this.form.username,
           password: this.form.password
         };

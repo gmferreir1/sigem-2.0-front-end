@@ -56,6 +56,46 @@ Vue.use(money, {
 
 
 /*
+ * Chosen
+ */
+require('../node_modules/chosen-js/chosen.jquery.min')
+
+
+/*
+ * Lodash
+ */
+window._ = require('lodash')
+
+
+/*
+ * Numeral
+ */
+window.numeral = require('numeral')
+// load a locale
+window.numeral.register('locale', 'pt-br', {
+  delimiters: {
+    thousands: '.',
+    decimal: ','
+  },
+  currency: {
+    symbol: 'R$'
+  }
+})
+numeral.locale('pt-br')
+
+
+/*
+ * Froala Editor
+ */
+require('../node_modules/froala-editor/js/froala_editor.pkgd.min')
+require('../node_modules/froala-editor/js/languages/pt_br')
+require('../node_modules/froala-editor/css/froala_editor.pkgd.min.css')
+require('../node_modules/font-awesome/css/font-awesome.css')
+require('../node_modules/froala-editor/css/froala_style.min.css')
+import VueFroala from 'vue-froala-wysiwyg'
+Vue.use(VueFroala)
+
+/*
  * Pusher
  */
 

@@ -32,8 +32,24 @@ const getDestinationAndReason = async ({commit}) => {
 
 }
 
+
+const getAllResponsible = async ({commit}) => {
+
+  try {
+    const res = await http.get('termination/contract/get-all-responsible')
+    commit('SET_ALL_RESPONSIBLE', res.data)
+    return res
+  } catch (e) {
+    return Reject(e)
+  }
+
+}
+
+
+
 export default {
   saveDestinationOrReason,
   updateDestinationOrReason,
-  getDestinationAndReason
+  getDestinationAndReason,
+  getAllResponsible
 }

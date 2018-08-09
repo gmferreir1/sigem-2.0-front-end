@@ -145,6 +145,7 @@ export default {
   @import './assets/styles/urban.css';
   @import './assets/styles/urban.skins.css';
   @import './assets/styles/my-style.css';
+  @import './assets/styles/chosen-custom.css';
 
   .min-height {
     min-height: calc(100vh - 57px) !important

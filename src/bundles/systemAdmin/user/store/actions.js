@@ -7,6 +7,8 @@ const getAllUsers = async ({commit}, queryParams) => {
       commit('SET_USERS', res.data.data)
     }
 
+    return res
+
   } catch (e) {
     return e
   }
