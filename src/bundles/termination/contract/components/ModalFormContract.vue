@@ -2,12 +2,59 @@
     <div>
         <div id="modalFormContract" class="modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-xl">
-                <div class="modal-content">
+                <div class="modal-content" v-loading="load_data" element-loading-text="Gerando impressão, aguarde ...">
 
                     <!-- modal header -->
                     <modal-header title="Rescisão de Contrato" @closeModal="closeModal">
                       <i class="fa fa-file" slot="icon_title"></i>
                       <slot>
+
+                        <div style="position: absolute; right: 353px;">
+
+                          <div class="btn-group mr15">
+                            <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">Impressão Fichas
+                              <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                              <li>
+                                <a href="javascript:;" @click.prevent="generateRecord({name: 'termination', type: 'pdf'})">Ficha Rescisão de Contrato (PDF)</a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                <a href="javascript:;" @click.prevent="generateRecord({name: 'transfer', type: 'pdf'})">Ficha Transferencia de Contrato (PDF)</a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                <a href="javascript:;" @click.prevent="$emit('openModalDateSurvey', {name: 'delivery_keys_pendencie', type: 'pdf'})">
+                                  Termo Ent. de Chaves Ressalva (PDF)
+                                </a>
+                                <a href="javascript:;" @click.prevent="$emit('openModalDateSurvey', {name: 'delivery_keys_pendencie', type: 'word'})">
+                                  Termo Ent. de Chaves Ressalva (WORD)
+                                </a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                <a href="javascript:;" @click.prevent="$emit('openModalDeliveryKeysBeforeSurvey', {name: 'delivery_keys_before_survey', type: 'pdf'})">
+                                  Termo Ent. de Chaves Antes Vistoria (PDF)
+                                </a>
+                                <a href="javascript:;" @click.prevent="$emit('openModalDeliveryKeysBeforeSurvey', {name: 'delivery_keys_before_survey', type: 'word'})">
+                                  Termo Ent. de Chaves Antes Vistoria (WORD)
+                                </a>
+                              </li>
+                              <li class="divider"></li>
+                              <li>
+                                <a href="javascript:;" @click.prevent="$emit('openModalDeliveryKeysBeforeSurvey', {name: 'delivery_keys_after_survey', type: 'pdf'})">
+                                  Termo Ent. de Chaves Apos Vistoria (PDF)
+                                </a>
+                                <a href="javascript:;" @click.prevent="$emit('openModalDeliveryKeysBeforeSurvey', {name: 'delivery_keys_after_survey', type: 'word'})">
+                                  Termo Ent. de Chaves Apos Vistoria (WORD)
+                                </a>
+                              </li>
+                            </ul>
+                          </div>
+
+                        </div>
+
                         <button class="button btn btn-sm btn-warning"
                                 @click="showComponent"
                                 v-if="showButtonToggleComponent">{{button_name}}</button>
@@ -99,6 +146,38 @@ export default {
         this.button_name = 'Acessórios da Locação'
       }
     },
+    /**
+     * Metodo para geração de fichas
+     * @param params
+     */
+    generateRecord (params) {
+      this.load_data = true
+
+      params.termination_id = this.dataModal.data.id
+      const queryParams = {
+        params
+      }
+
+      http.get('termination/record', queryParams).then(res => {
+
+        const url = window.URL_API + '/' + res.data.file_name
+        window.open(url)
+
+        const params = {
+          params: {
+            file_name: res.data.file_name
+          }
+        }
+
+        setTimeout(() => {
+          this.load_data = false
+          http.get('api/remove-file', params)
+        }, 1500)
+
+      }).catch(() => {
+        this.load_data = false
+      })
+    },
     closeModal() {
       $('#modalFormContract').modal('hide')
     }
@@ -130,6 +209,11 @@ export default {
       }
       return false
     }
+  },
+  mounted (){
+    this.$bus.$on('Termination\Contract:GenerateRecord', (params) => {
+      this.generateRecord(params)
+    })
   }
 }
 </script>

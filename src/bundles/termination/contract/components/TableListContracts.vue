@@ -381,6 +381,12 @@ export default {
           const url = window.URL_API + '/' + res.data.file_name
           window.open(url)
 
+          const params = {
+            params: {
+              file_name: res.data.file_name
+            }
+          }
+
           setTimeout(() => {
             http.get('api/remove-file', params)
           }, 1500)
