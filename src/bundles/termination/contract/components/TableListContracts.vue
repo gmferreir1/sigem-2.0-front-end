@@ -10,7 +10,7 @@
       <button class="button btn btn-sm btn-primary" @click="$emit('openModalFormContract', 'new_release')">Novo Lançamento</button>
       <button class="button btn btn-sm btn-default" @click="$emit('openModalScoreAttendance')">Score Atendimento</button>
       <button class="button btn btn-sm btn-warning" @click="$emit('openModalDestinationOrReason')">Motivos / Destinos</button>
-      <button class="button btn btn-sm btn-default">Baixa em Lote</button>
+      <button class="button btn btn-sm btn-default" @click="$emit('openModalEndContractsInLot')">Baixa em Lote</button>
       <button class="button btn btn-sm btn-default" @click="$emit('openModalSelectTypePrinter')">
         <i class="fa fa-print"></i>
       </button>

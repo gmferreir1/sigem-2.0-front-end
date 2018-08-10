@@ -6,7 +6,8 @@
       @openModalDestinationOrReason="data_modal_destination_or_reason = {data: ''}"
       @edit="editContract"
       @openModalScoreAttendance="openModalScoreAttendance"
-      @openModalSelectTypePrinter="data_modal_select_type_printer = {data: ''}"/>
+      @openModalSelectTypePrinter="data_modal_select_type_printer = {data: ''}"
+      @openModalEndContractsInLot="data_modal_end_contracts_in_lot = {data: ''}"/>
 
     <!-- modal formulário de contrato -->
     <modal-form-contract :dataModal="data_modal_form_contract"
@@ -40,6 +41,10 @@
     <modal-delivery-keys-survey :dataModal="data_modal_delivery_keys_before_survey" />
     <!-- / modal entrega de chaves antes da vistoria -->
 
+    <!-- modal baixa de contratos em lote -->
+    <modal-end-contracts-in-lot :dataModal="data_modal_end_contracts_in_lot" />
+    <!-- / modal baixa de contratos em lote -->
+
   </div>
 
 </template>
@@ -53,6 +58,7 @@ import ModalScore from '../../scoreAttendance/components/ModalScore'
 import ModalSelectTypePrinter from '../components/ModalSelectTypePrinter'
 import ModalDateSurvey from '../components/ModalDateSurvey'
 import ModalDeliveryKeysSurvey from '../components/ModalDeliveryKeysSurvey'
+import ModalEndContractsInLot from '../components/ModalEndContractsInLot'
 
 export default {
   components: {
@@ -63,7 +69,8 @@ export default {
     ModalFormGuarantors,
     ModalScore,
     ModalSelectTypePrinter,
-    ModalDeliveryKeysSurvey
+    ModalDeliveryKeysSurvey,
+    ModalEndContractsInLot
   },
   data () {
     return {
@@ -74,6 +81,7 @@ export default {
       data_modal_select_type_printer: {},
       data_modal_date_survey: {},
       data_modal_delivery_keys_before_survey: {},
+      data_modal_end_contracts_in_lot: {},
     }
   },
   methods: {

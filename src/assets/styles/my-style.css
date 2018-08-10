@@ -123,3 +123,8 @@ p {
   text-align: center !important;
   position: absolute !important;
 }
+
+.adjust-td {
+  padding-top: 4px !important;
+  padding-bottom: 2px !important;
+}
