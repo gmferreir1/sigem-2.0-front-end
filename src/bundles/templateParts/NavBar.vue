@@ -30,9 +30,9 @@
             </router-link>
           </li>
           <li>
-            <a href="map-vector.html">
+            <router-link :to="{name: 'termination.DeadFile'}">
               <span>Arquivo Morto</span>
-            </a>
+            </router-link>
           </li>
           <li>
             <a href="map-vector.html">

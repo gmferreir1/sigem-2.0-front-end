@@ -27,6 +27,7 @@ import Dashboard from '@/bundles/dashboard/page/Main'
  */
 import Termination from '@bundles/termination/Main'
 import Termination_Contract from '@bundles/termination/contract/page/Main'
+import Termination_DeadFile from '@bundles/termination/deadFile/page/Main'
 
 
 Vue.use(Router)
@@ -55,6 +56,11 @@ const router = new Router({
           path: 'contract',
           name: 'termination.Contract',
           component: Termination_Contract
+        },
+        {
+          path: 'dead-file',
+          name: 'termination.DeadFile',
+          component: Termination_DeadFile
         }
       ]
     },
