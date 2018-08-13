@@ -1,11 +1,16 @@
 <template>
 
-  <div class="panel" v-loading="load_data" element-loading-text="Carregando dados, aguarde ...">
+  <div class="panel" v-loading="load_data" :element-loading-text="load_data_message">
 
     <div class="panel-heading">
       Total de Processos Arquivados: (<span style="font-weight: bold">{{data_list.data.length}}</span>)
     </div>
 
+    <div style="position: absolute; right: 10px; top: 10px">
+      <button class="button btn btn-sm btn-default" @click="callPrinter">
+        <i class="fa fa-print"></i>
+      </button>
+    </div>
 
     <panel-search />
 
@@ -83,6 +88,7 @@ export default {
   },
   data () {
     return {
+      load_data_message: 'Carregando dados, aguarde ...',
       load_data: true,
       data_list: {
         data: []
@@ -91,7 +97,8 @@ export default {
         type_release: ['rent'],
         year_release: [moment().format('YYYY')],
         input_search: ''
-      }
+      },
+      printer: false
     }
   },
   methods: {
@@ -105,13 +112,31 @@ export default {
           type_release: this.filter.type_release,
           year_release: this.filter.year_release,
           search: this.filter.input_search,
-          searchFields: 'contract:like;file:like;cashier:like'
+          searchFields: 'contract:like;file:like;cashier:like',
+          printer: this.printer
         }
       }
 
       http.get('dead-file', queryParams).then(res => {
 
-        this.data_list.data = res.data.data
+        if (this.printer) {
+          this.printer = false
+          const url = window.URL_API + '/' + res.data.file_name
+          window.open(url)
+
+          const params = {
+            params: {
+              file_name: res.data.file_name
+            }
+          }
+
+          setTimeout(() => {
+            http.get('api/remove-file', params)
+          }, 1500)
+
+        } else {
+          this.data_list.data = res.data.data
+        }
 
         setTimeout(() => {
           this.load_data = false
@@ -120,6 +145,12 @@ export default {
       }).catch(() => {
         this.load_data = false
       })
+    },
+    callPrinter () {
+      this.printer = true
+      this.load_data = true
+      this.load_data_message = 'Gerando impressão, aguarde ...'
+      this.getData()
     }
   },
   mounted () {
@@ -130,6 +161,7 @@ export default {
     })
 
     this.$bus.$on('Termination\DeadFile:Search', (dataFilter) => {
+      this.load_data_message = 'Carregando dados, aguarde ...'
       this.load_data = true
 
       this.filter.type_release = dataFilter.type_release

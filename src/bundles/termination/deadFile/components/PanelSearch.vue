@@ -7,7 +7,8 @@
       <div class="row">
 
         <div class="col-md-3">
-          <input type="text" class="form-control input-sm" placeholder="Pesquisa de dados: Contrato, Arquivo, Caixa" v-model="filter.input_search" @keypress.enter="search">
+          <input type="text" class="form-control input-sm" title="Pesquisa de dados: Contrato, Arquivo, Caixa"
+                 placeholder="Pesquisa de dados: Contrato, Arquivo, Caixa" v-model="filter.input_search" @keypress.enter="search">
         </div>
 
         <div class="col-md-2" style="width: 125px">

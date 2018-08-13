@@ -173,7 +173,7 @@
             <!-- hidden md -->
             <th class="text-left hidden-md" style="width: 150px">Destino</th>
 
-            <th class="text-center width-edit" style="width: 50px"> - </th>
+            <th class="text-center" style="width: 70px"> - </th>
           </tr>
           </thead>
           <tbody>
@@ -187,7 +187,7 @@
             <!-- hidden lg -->
             <td class="hidden-lg text-left" style="width: 100px">
               <a href="#" @click.prevent="edit(list)">
-                {{ strLimit(wordUpper(list.rp_per_inactive_name), 10) }}
+                {{ strLimit(wordUpper(list.rp_per_inactive_name), 8) }}
               </a>
             </td>
             <!-- hidden md -->
@@ -283,10 +283,17 @@
               </a>
             </td>
 
-            <td class="text-center width-edit" style="width: 50px">
+            <td class="text-center" style="width: 70px">
+
               <a href="" @click.prevent="edit(list)">
                 <i class="fa fa-pencil size-icon-table orange"></i>
               </a>
+
+              <a href="" @click.prevent="$emit('openModalArchive', list)" style="margin-left: 4px" title="Arquivar processo">
+                <i class="fa fa-archive size-icon-table orange"></i>
+              </a>
+
+
             </td>
           </tr>
           </tbody>
