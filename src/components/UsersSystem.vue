@@ -2,7 +2,7 @@
 
   <div>
 
-    <select class="form-control chosen input-sm" data-placeholder="Usuários" id="users_system" v-model="user_selected">
+    <select class="form-control chosen input-sm" data-placeholder="Usuários" :id="id_component" v-model="user_selected">
       <option value=""></option>
       <option v-for="user in users" :value="user.id">{{wordUpper(`${user.name} ${user.last_name}`)}}</option>
     </select>
@@ -23,6 +23,10 @@ export default {
     },
     setUser: {
       required: false
+    },
+    id_component: {
+      required: false,
+      default: 'users_select'
     }
   },
   data () {
@@ -42,7 +46,7 @@ export default {
         no_results_text: "Oops, nada encontrado para: "
       })
 
-      $('#users_system').on('change', function(evt, params) {
+      $('#' + this.id_component).on('change', function(evt, params) {
         self.$emit('userSelected', (params ? params.selected : ''))
       })
 

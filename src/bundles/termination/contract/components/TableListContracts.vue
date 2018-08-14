@@ -129,7 +129,7 @@
               </a>
             </th>
 
-            <th class="text-left" style="width: 120px">
+            <th class="text-left" style="width: 100px">
               <a href="#" @click.prevent="sort('tenant')">
                 <span v-if="sort_by == 'tenant' ">
                     <i class="fa" v-if="sort_by == 'tenant'"
@@ -140,7 +140,8 @@
                 <span v-else>
                     <i class="fa fa-sort" aria-hidden="true"></i>
                 </span>
-                Locatário
+                <span class="hidden-lg" title="Locatário">Loca</span>
+                <span class="hidden-md" title="Locatário">Locatário</span>
               </a>
             </th>
 
@@ -168,12 +169,12 @@
             <th class="text-left hidden-md" style="width: 150px">Motivo</th>
 
             <th class="text-left" style="width: 100px">Status</th>
-            <th class="text-center" style="width: 100px">FIM</th>
+            <th class="text-center" style="width: 80px">FIM</th>
             <th class="text-center" style="width: 50px">TMP</th>
             <!-- hidden md -->
             <th class="text-left hidden-md" style="width: 150px">Destino</th>
 
-            <th class="text-center" style="width: 70px"> - </th>
+            <th class="text-center" style="width: 100px"> - </th>
           </tr>
           </thead>
           <tbody>
@@ -218,7 +219,7 @@
               </a>
             </td>
 
-            <td class="text-left" :title="wordUpper(list.tenant)" style="width: 120px">
+            <td class="text-left" :title="wordUpper(list.tenant)" style="width: 100px">
               <a href="#" @click.prevent="edit(list)">
                 {{ wordUpper(strLimit(list.tenant, 10 )) }}
               </a>
@@ -265,7 +266,7 @@
               </a>
             </td>
 
-            <td class="text-center" style="width: 100px">
+            <td class="text-center" style="width: 80px">
               <a href="#" @click.prevent="edit(list)">
                 {{ !list.end_process ? ' - ' : dateFormat(list.end_process, 'DD/MM/YYYY') }}
               </a>
@@ -283,14 +284,20 @@
               </a>
             </td>
 
-            <td class="text-center" style="width: 70px">
+            <td class="text-center" style="width: 100px">
 
               <a href="" @click.prevent="edit(list)">
                 <i class="fa fa-pencil size-icon-table orange"></i>
               </a>
 
-              <a href="" @click.prevent="$emit('openModalArchive', list)" style="margin-left: 4px" title="Arquivar processo">
-                <i class="fa fa-archive size-icon-table orange"></i>
+              <a href="" @click.prevent="$emit('openModalArchive', list)" style="margin-left: 4px" title="Arquivo">
+                <i class="fa fa-archive size-icon-table" v-if="list.archive" style="color: #CCCCCC"></i>
+                <i class="fa fa-archive size-icon-table orange" v-else></i>
+              </a>
+
+              <a href="" @click.prevent="$emit('openModalReleaseImmobile', list)" style="margin-left: 4px" title="Liberar Chaves">
+                <i class="fa fa-key size-icon-table" v-if="list.release_immobile" style="color: #CCCCCC"></i>
+                <i class="fa fa-key size-icon-table orange" v-else></i>
               </a>
 
 
@@ -459,7 +466,7 @@ export default {
 
   th {
     font-weight: normal !important;
-    font-size: 12px;
+    font-size: 11px;
   }
 
   tr {

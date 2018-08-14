@@ -7,7 +7,9 @@
       @edit="editContract"
       @openModalScoreAttendance="openModalScoreAttendance"
       @openModalSelectTypePrinter="data_modal_select_type_printer = {data: ''}"
-      @openModalEndContractsInLot="data_modal_end_contracts_in_lot = {data: ''}"/>
+      @openModalEndContractsInLot="data_modal_end_contracts_in_lot = {data: ''}"
+      @openModalArchive="termination_data => data_modal_archive_process = {termination_data}"
+      @openModalReleaseImmobile="termination_data => data_modal_release_immobile = {termination_data}"/>
 
     <!-- modal formulário de contrato -->
     <modal-form-contract :dataModal="data_modal_form_contract"
@@ -45,6 +47,14 @@
     <modal-end-contracts-in-lot :dataModal="data_modal_end_contracts_in_lot" />
     <!-- / modal baixa de contratos em lote -->
 
+    <!-- modal arquivamento de processo -->
+    <modal-archive-process :dataModal="data_modal_archive_process" />
+    <!-- / modal arquivamento de processo -->
+
+    <!-- modal liberação do imóvel -->
+    <modal-release-immobile :dataModal="data_modal_release_immobile" />
+    <!-- / modal liberação do imóvel -->
+
   </div>
 
 </template>
@@ -59,9 +69,12 @@ import ModalSelectTypePrinter from '../components/ModalSelectTypePrinter'
 import ModalDateSurvey from '../components/ModalDateSurvey'
 import ModalDeliveryKeysSurvey from '../components/ModalDeliveryKeysSurvey'
 import ModalEndContractsInLot from '../components/ModalEndContractsInLot'
+import ModalArchiveProcess from '../components/ModalArchiveProcess'
+import ModalReleaseImmobile from '../components/ModalReleaseImmobile'
 
 export default {
   components: {
+    ModalReleaseImmobile,
     ModalDateSurvey,
     TableListContracts,
     ModalFormContract,
@@ -70,7 +83,8 @@ export default {
     ModalScore,
     ModalSelectTypePrinter,
     ModalDeliveryKeysSurvey,
-    ModalEndContractsInLot
+    ModalEndContractsInLot,
+    ModalArchiveProcess
   },
   data () {
     return {
@@ -82,6 +96,8 @@ export default {
       data_modal_date_survey: {},
       data_modal_delivery_keys_before_survey: {},
       data_modal_end_contracts_in_lot: {},
+      data_modal_archive_process: {},
+      data_modal_release_immobile: {}
     }
   },
   methods: {

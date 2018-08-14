@@ -9,7 +9,7 @@
                       <i class="fa fa-file" slot="icon_title"></i>
                       <slot>
 
-                        <div style="position: absolute; right: 353px;">
+                        <div style="position: absolute; right: 353px;" v-if="dataModal && dataModal.data && dataModal.data.id">
 
                           <div class="btn-group mr15">
                             <button type="button" class="btn btn-default dropdown-toggle btn-sm" data-toggle="dropdown">Impressão Fichas
@@ -184,7 +184,6 @@ export default {
   },
   watch: {
     dataModal() {
-
       this.show_component = 'form_contract'
       this.button_name = 'Acessórios da Locação'
 
