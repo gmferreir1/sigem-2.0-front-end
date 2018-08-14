@@ -28,6 +28,7 @@ import Dashboard from '@/bundles/dashboard/page/Main'
 import Termination from '@bundles/termination/Main'
 import Termination_Contract from '@bundles/termination/contract/page/Main'
 import Termination_DeadFile from '@bundles/termination/deadFile/page/Main'
+import Immobile_Release from '@bundles/termination/immobileRelease/page/Main'
 
 
 Vue.use(Router)
@@ -61,6 +62,11 @@ const router = new Router({
           path: 'dead-file',
           name: 'termination.DeadFile',
           component: Termination_DeadFile
+        },
+        {
+          path: 'immobile-release',
+          name: 'termination.ImmobileRelease',
+          component: Immobile_Release
         }
       ]
     },

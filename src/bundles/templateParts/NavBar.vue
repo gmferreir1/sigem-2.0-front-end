@@ -35,9 +35,9 @@
             </router-link>
           </li>
           <li>
-            <a href="map-vector.html">
+            <router-link :to="{name: 'termination.ImmobileRelease'}">
               <span>Imóveis Liberados</span>
-            </a>
+            </router-link>
           </li>
         </ul>
       </li>
