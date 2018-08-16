@@ -4,11 +4,13 @@ import Vuex from 'vuex'
 import Auth from '@/bundles/systemAdmin/user/store'
 import Sicadi from '@/bundles/sicadi/store'
 import Termination from '@/bundles/termination/store'
+import Register from '@/bundles/register/store'
 
 const modules = {
   Auth,
   Sicadi,
-  Termination
+  Termination,
+  Register
 }
 
 Vue.use(Vuex)

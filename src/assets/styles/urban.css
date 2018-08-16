@@ -3942,6 +3942,7 @@ a.list-group-item-danger.active:focus {
   -o-animation-fill-mode: forwards;
   animation-fill-mode: forwards;
 }
+/*
 .modal .modal-dialog {
   -webkit-animation-name: animation-close;
   -moz-animation-name: animation-close;
@@ -3967,6 +3968,7 @@ a.list-group-item-danger.active:focus {
   -o-animation-name: animation-open;
   animation-name: animation-open;
 }
+*/
 /* $navbar
  ------------------------------------------*/
 .navbar {

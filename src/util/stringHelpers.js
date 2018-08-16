@@ -24,7 +24,7 @@ const wordUpper = (text) => {
   let words = text.toLowerCase().split(' ')
   for (let a = 0; a < words.length; a++) {
     let w = words[a]
-    if (w[0] !== 'd' || w.slice(1) !== 'e') {
+    if (w[0] !== 'd' || w.slice(1) !== 'e' ) {
       words[a] = !w[0] ? w[0] : w[0].toUpperCase() + w.slice(1)
     }
   }

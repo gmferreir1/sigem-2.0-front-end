@@ -30,6 +30,12 @@ import Termination_Contract from '@bundles/termination/contract/page/Main'
 import Termination_DeadFile from '@bundles/termination/deadFile/page/Main'
 import Immobile_Release from '@bundles/termination/immobileRelease/page/Main'
 
+/*
+ * Cadastro
+ */
+import Register from '@bundles/register/Main'
+import Register_Reserve from '@bundles/register/reserve/page/Main'
+
 
 Vue.use(Router)
 
@@ -67,6 +73,21 @@ const router = new Router({
           path: 'immobile-release',
           name: 'termination.ImmobileRelease',
           component: Immobile_Release
+        }
+      ]
+    },
+    /**
+     * Cadastro
+     */
+    {
+      path: '/register',
+      name: 'register',
+      component: Register,
+      children: [
+        {
+          path: 'reserve',
+          name: 'register.Reserve',
+          component: Register_Reserve
         }
       ]
     },

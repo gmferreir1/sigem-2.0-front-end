@@ -12,18 +12,29 @@
         </a>
       </li>
       <!-- /dashboard -->
-      <!-- maps -->
+      <!-- cadastro -->
+      <li>
+        <a href="javascript:;">
+          <i class="fa fa-folder"></i>
+          <span>Cadastro</span>
+        </a>
+        <ul class="sub-menu">
+          <li>
+            <router-link :to="{name: 'register.Reserve'}">
+              <span>Acompanhamento Reserva</span>
+            </router-link>
+          </li>
+        </ul>
+      </li>
+      <!-- / cadastro -->
+
+      <!-- rescisão -->
       <li>
         <a href="javascript:;">
           <i class="fa fa-file"></i>
           <span>Rescisão</span>
         </a>
         <ul class="sub-menu">
-          <li>
-            <a href="map-google.html">
-              <span>Notificações</span>
-            </a>
-          </li>
           <li>
             <router-link :to="{name: 'termination.Contract'}">
               <span>Contratos</span>
@@ -41,63 +52,7 @@
           </li>
         </ul>
       </li>
-      <!-- /maps -->
-
-      <!-- ui kit -->
-      <li>
-        <a href="widgets.html">
-          <i class="fa fa-toggle-on"></i>
-          <span>Widgets</span>
-        </a>
-      </li>
-      <!-- /ui kit -->
-
-      <!-- menu levels -->
-      <li>
-        <a href="javascript:;">
-          <i class="fa fa-level-down"></i>
-          <span>Menu Levels</span>
-        </a>
-        <ul class="sub-menu">
-          <li>
-            <a href="javascript:;">
-              <i class="toggle-accordion"></i>
-              <span>Level 1.1</span>
-            </a>
-            <ul class="sub-menu">
-              <li>
-                <a href="javascript:;">
-                  <i class="toggle-accordion"></i>
-                  <span>Level 2.1</span>
-                </a>
-                <ul class="sub-menu">
-                  <li>
-                    <a href="javascript:;">
-                      <span>Level 3.1</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a href="javascript:;">
-                      <span>Level 3.2</span>
-                    </a>
-                  </li>
-                </ul>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <span>Level 2.2</span>
-                </a>
-              </li>
-            </ul>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <span>Level 1.2</span>
-            </a>
-          </li>
-        </ul>
-      </li>
-      <!-- menu levels -->
+      <!-- /rescisão -->
 
     </ul>
   </nav>
