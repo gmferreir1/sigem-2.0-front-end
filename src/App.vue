@@ -73,7 +73,6 @@
     </div>
 
 
-
     <!-- modal Sicadi data -->
     <modal-sicadi-show-data />
     <!-- / modal Sicadi data -->
@@ -90,8 +89,11 @@ import NavBar from '@bundles/templateParts/NavBar'
 import FooterPage from '@bundles/templateParts/FooterPage'
 import RightMenu from '@bundles/templateParts/RightMenu'
 import ModalSicadiShowData from '@bundles/sicadi/components/ModalSicadiShowData'
+import {notification} from '@bundles/notification/mixins/notification'
+import {mapMutations} from 'vuex'
 
 export default {
+  mixins: [notification],
   components: {
     QuickLunchPanel,
     TopHeader,
@@ -105,6 +107,9 @@ export default {
     return {
       show_template_parts: false
     }
+  },
+  methods: {
+    ...mapMutations('Notification', ['SET_NOTIFICATION']),
   },
   beforeMount() {
     this.show_template_parts = false

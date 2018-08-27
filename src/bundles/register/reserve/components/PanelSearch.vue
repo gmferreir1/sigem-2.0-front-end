@@ -42,7 +42,7 @@
 
         <!-- hidden md -->
         <div class="col-md-2 hidden-md">
-          <button class="button btn btn-sm btn-primary">Pesquisar</button>
+          <button class="button btn btn-sm btn-primary" @click="filterData">Pesquisar</button>
         </div>
 
         <div class="hidden-md" style="float: right">
@@ -54,7 +54,7 @@
             <i class="fa fa-user"></i>
           </button>
 
-          <button class="button btn btn-sm btn-default" title="Motivos para cancelamento">
+          <button class="button btn btn-sm btn-default" title="Motivos para cancelamento" @click="$emit('openModalReasonCancel')">
             <i class="fa fa-list"></i>
           </button>
           <!-- abrir a documentação
@@ -62,7 +62,7 @@
             <i class="fa fa-folder"></i>
           </button>
           <!-- / abrir a documentação -->
-          <button class="button btn btn-sm btn-default" title="Impressão">
+          <button class="button btn btn-sm btn-default" title="Impressão" @click="$emit('openModalSelectTypePrint', filter)" :disabled="!reserve_contracts.length">
             <i class="fa fa-print"></i>
           </button>
         </div>
@@ -83,7 +83,7 @@
             <i class="fa fa-user"></i>
           </button>
 
-          <button class="button btn btn-sm btn-default" title="Motivos para cancelamento">
+          <button class="button btn btn-sm btn-default" title="Motivos para cancelamento" @click="$emit('openModalReasonCancel')">
             <i class="fa fa-list"></i>
           </button>
           <!-- abrir a documentação
@@ -91,13 +91,11 @@
             <i class="fa fa-folder"></i>
           </button>
           <!-- / abrir a documentação -->
-          <button class="button btn btn-sm btn-default" title="Impressão">
+          <button class="button btn btn-sm btn-default" title="Impressão" @click="$emit('openModalSelectTypePrint', filter)" :disabled="!reserve_contracts.length">
             <i class="fa fa-print"></i>
           </button>
         </div>
         <!-- / hidden lg -->
-
-
 
 
       </div>
@@ -113,8 +111,10 @@ import SelectStatus from '@/components/MultipleSelect'
 import SelectResponsibleRegisterSector from '@/components/MultipleSelect'
 import SelectResponsibleReception from '@/components/MultipleSelect'
 import DatePicker from '@/components/DatePicker'
+import {mapActions, mapState} from 'vuex'
 
 export default {
+  props: ['sortBy'],
   data () {
     return {
       select: {
@@ -179,7 +179,10 @@ export default {
         responsible_reception: [],
         init_date: '',
         end_date: '',
-        search_for: 'r'
+        search_for: 'r',
+        print: false,
+        sort_by: this.sortBy.sort_by,
+        sort_order: this.sortBy.sort_order
       }
     }
   },
@@ -190,10 +193,36 @@ export default {
     DatePicker
   },
   methods: {
+    ...mapActions('Register', ['getReserveContracts', 'getResponsibleForFilter']),
+    filterData () {
 
+      this.$bus.$emit('Register\Reserve:LoadingTableList')
+
+      this.filter.print = false
+
+      const queryParams = {
+        params: this.filter
+      }
+      this.getReserveContracts(queryParams)
+    }
+  },
+  computed: {
+    ...mapState('Register', ['responsible_filter_contracts', 'reserve_contracts'])
+  },
+  watch: {
+    'responsible_filter_contracts.users_register_sector' () {
+      this.select.responsible_register_sector.data = this.responsible_filter_contracts.users_register_sector
+    },
+    'responsible_filter_contracts.users_reception' () {
+      this.select.responsible_reception.data = this.responsible_filter_contracts.users_reception
+    },
+    sortBy () {
+      this.filter.sort_by = this.sortBy.sort_by
+      this.filter.sort_order = this.sortBy.sort_order
+    }
   },
   mounted () {
-
+    this.getResponsibleForFilter()
   }
 }
 </script>

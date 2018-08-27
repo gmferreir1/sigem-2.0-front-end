@@ -1,29 +1,32 @@
 <template>
 
   <div>
-    <editor />
+    <editor @textEditor="text => $emit('textEditor', text)" />
+
+
+    <!-- not found component -->
+    <div class="row" v-if="!historic_contract.length" style="margin-top: 10px">
+      <div class="col-md-5 col-md-offset-5">
+        <not-found />
+      </div>
+    </div>
+    <!-- / not found component -->
 
     <!-- tabela de listagem -->
-    <div class="table-responsive" style="margin-top: 10px">
+    <div class="table-responsive" style="margin-top: 10px" v-if="historic_contract.length">
       <table class="table table-striped table-bordered table-hover table-condensed">
         <thead>
         <tr>
-          <th class="text-center">Histórico</th>
-          <th class="text-center">Responsável</th>
-          <th class="text-center">Data/Hora</th>
+          <th class="text-left" style="width: 75%">Histórico</th>
+          <th class="text-left" style="width: 10%">Responsável</th>
+          <th class="text-center" style="width: 14%">Data/Hora</th>
         </tr>
         </thead>
         <tbody>
-        <tr>
-          <td class="text-center">aaaaa</td>
-          <td class="text-center">aaaa</td>
-          <td class="text-center">
-
-            <a href="" @click.prevent="">
-              <i class="fa fa-ban size-icon-table" style="color: #CCCCCC"></i>
-            </a>
-
-          </td>
+        <tr v-for="list in historic_contract">
+          <td class="text-left" v-html="list.historic" style="width: 75%"></td>
+          <td class="text-left" style="width: 10%" :title="wordUpper(list.rp_last_action_name)">{{strLimit(wordUpper(list.rp_last_action_name), 10)}}</td>
+          <td class="text-center" style="width: 14%">{{dateFormat(list.created_at, 'DD/MM/YYYY HH:mm:ss')}}</td>
         </tr>
         </tbody>
       </table>
@@ -36,10 +39,24 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
+import {wordUpper, strLimit} from '@/util/stringHelpers'
 import Editor from '@/components/Editor'
+import {dateFormat} from '@/util/dateTime'
+import NotFound from '@/components/NotFound'
+
 export default {
   components: {
-    Editor
+    Editor,
+    NotFound
+  },
+  methods: {
+    wordUpper,
+    strLimit,
+    dateFormat
+  },
+  computed: {
+    ...mapState('Register', ['historic_contract'])
   }
 }
 </script>
@@ -60,7 +77,7 @@ export default {
   }
 
   tbody {
-    max-height: calc(100vh - 340px) !important;
+    max-height: calc(100vh - 600px) !important;
     overflow-y: auto;    /* Trigger vertical scroll    */
     overflow-x: hidden;  /* Hide the horizontal scroll */
   }

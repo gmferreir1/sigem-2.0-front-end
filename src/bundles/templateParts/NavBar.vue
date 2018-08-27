@@ -21,7 +21,7 @@
         <ul class="sub-menu">
           <li>
             <router-link :to="{name: 'register.Reserve'}">
-              <span>Acompanhamento Reserva</span>
+              <span>Reserva</span>
             </router-link>
           </li>
         </ul>
@@ -48,6 +48,22 @@
           <li>
             <router-link :to="{name: 'termination.ImmobileRelease'}">
               <span>Imóveis Liberados</span>
+            </router-link>
+          </li>
+        </ul>
+      </li>
+      <!-- /rescisão -->
+
+      <!-- rescisão -->
+      <li>
+        <a href="javascript:;">
+          <i class="fa fa-money"></i>
+          <span>Financeiro</span>
+        </a>
+        <ul class="sub-menu">
+          <li>
+            <router-link :to="{name: 'financial.ContractCelebrated'}">
+              <span>Contratos Celebrados</span>
             </router-link>
           </li>
         </ul>

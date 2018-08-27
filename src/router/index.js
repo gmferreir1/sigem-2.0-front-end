@@ -36,6 +36,13 @@ import Immobile_Release from '@bundles/termination/immobileRelease/page/Main'
 import Register from '@bundles/register/Main'
 import Register_Reserve from '@bundles/register/reserve/page/Main'
 
+/*
+ * Financeiro
+ */
+import Financial from '@bundles/financial/Main'
+import Financial_ContractCelebrated from '@bundles/financial/contractCelebrated/page/Main'
+
+
 
 Vue.use(Router)
 
@@ -88,6 +95,21 @@ const router = new Router({
           path: 'reserve',
           name: 'register.Reserve',
           component: Register_Reserve
+        }
+      ]
+    },
+    /**
+     * Financeiro
+     */
+    {
+      path: '/financial',
+      name: 'financial',
+      component: Financial,
+      children: [
+        {
+          path: 'contract-celebrated',
+          name: 'financial.ContractCelebrated',
+          component: Financial_ContractCelebrated
         }
       ]
     },

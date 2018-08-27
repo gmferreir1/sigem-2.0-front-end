@@ -5,7 +5,7 @@ const getSituation = (situation) => {
   }
 
   if (situation === 'd') {
-    return 'documentation'
+    return 'documentacao'
   }
 
   if (situation === 'a') {
