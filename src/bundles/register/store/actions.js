@@ -20,25 +20,6 @@ const getAttendantsScore = async ({commit}, queryParams) => {
 
 }
 
-/**
- * Pega os scores de atendimentos do modulo de transferencia
- * @param commit
- * @param queryParams
- * @returns {Promise<*>}
- */
-const getAttendantsScoreTransfer = async ({commit}, queryParams) => {
-
-  try {
-    const res = await http.get('register/transfer/score-attendant', queryParams)
-    commit('SET_ATTENDANTS_SCORE_TRANSFER', res.data.data)
-
-    return res
-
-  } catch (e) {
-    return e
-  }
-
-}
 
 /**
  * Retorna o ultimo atendente
@@ -136,12 +117,63 @@ const getReasonsCancel = async ({commit}) => {
 
 }
 
+
+
+
+
+/**************************************|
+ ****** Modulo de transferência *******|
+ **************************************|
+ */
+
+/**
+ * Pega os scores de atendimentos do modulo de transferência
+ * @param commit
+ * @param queryParams
+ * @returns {Promise<*>}
+ */
+const getAttendantsScoreTransfer = async ({commit}, queryParams) => {
+
+  try {
+    const res = await http.get('register/transfer/score-attendant', queryParams)
+    commit('SET_ATTENDANTS_SCORE_TRANSFER', res.data.data)
+
+    return res
+
+  } catch (e) {
+    return e
+  }
+
+}
+
+/**
+ * Pega os motivos de transferência
+ * @param commit
+ * @param queryParams
+ * @returns {Promise<*>}
+ */
+const getReasonsTransfer = async ({commit}, queryParams) => {
+
+  try {
+    const res = await http.get('register/transfer/reason')
+    commit('SET_REASONS_TRANSFER', res.data)
+    return res
+  } catch (e) {
+    return e
+  }
+
+}
+
+
+
+
 export default {
   getAttendantsScore,
-  getAttendantsScoreTransfer,
   getNextAttendance,
   getReserveContracts,
   getReserveContract,
   getResponsibleForFilter,
-  getReasonsCancel
+  getReasonsCancel,
+  getAttendantsScoreTransfer,
+  getReasonsTransfer
 }

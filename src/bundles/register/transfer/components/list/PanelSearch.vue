@@ -41,7 +41,7 @@
             <i class="fa fa-user"></i>
           </button>
 
-          <button class="button btn btn-sm btn-default" title="Motivos Transferência">
+          <button class="button btn btn-sm btn-default" title="Motivos Para Transferência" @click="$emit('openModalReason')">
             <i class="fa fa-comment"></i>
           </button>
 

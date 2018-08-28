@@ -4,7 +4,8 @@
 
 
 
-    <panel-search @openModalScoreAttendant="$emit('openModalScoreAttendant')"/>
+    <panel-search @openModalScoreAttendant="$emit('openModalScoreAttendant')"
+                  @openModalReason="$emit('openModalReason')"/>
 
     <div class="panel-body">
 
