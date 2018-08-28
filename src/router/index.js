@@ -35,6 +35,7 @@ import Immobile_Release from '@bundles/termination/immobileRelease/page/Main'
  */
 import Register from '@bundles/register/Main'
 import Register_Reserve from '@bundles/register/reserve/page/Main'
+import Register_Transfer from '@bundles/register/transfer/page/Main'
 
 /*
  * Financeiro
@@ -95,6 +96,11 @@ const router = new Router({
           path: 'reserve',
           name: 'register.Reserve',
           component: Register_Reserve
+        },
+        {
+          path: 'transfer',
+          name: 'register.Transfer',
+          component: Register_Transfer
         }
       ]
     },

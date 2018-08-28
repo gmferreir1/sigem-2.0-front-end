@@ -24,6 +24,11 @@
               <span>Reserva</span>
             </router-link>
           </li>
+          <li>
+            <router-link :to="{name: 'register.Transfer'}">
+              <span>Transferência</span>
+            </router-link>
+          </li>
         </ul>
       </li>
       <!-- / cadastro -->

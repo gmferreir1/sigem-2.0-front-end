@@ -21,7 +21,7 @@
 
 <script>
 import {mapActions} from 'vuex'
-import {wordUpper} from "../../../../util/stringHelpers";
+import {wordUpper} from '@/util/stringHelpers'
 export default {
   data () {
     return {

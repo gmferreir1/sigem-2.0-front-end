@@ -49,12 +49,12 @@
 import TableList from '../components/TableList'
 import ModalFormReserve from '../components/ModalFormReserve'
 import ModalWarnClient from '../components/ModalWarnClient'
-import ModalScoreAttendance from '../../score/components/ModalScoreAttendance'
+import ModalScoreAttendance from '../../reserve/components/score/components/ModalScoreAttendance'
 import ModalConfirmCloseReserve from '../components/ModalConfirmCloseReserve'
 import ModalFinancialFinalData from '../components/ModalFinancialFinalData'
 import ModalSendEmailCloseReserve from '../components/ModalSendEmailCloseReserve'
 import ModalSelectTypePrint from '../components/ModalSelectTypePrint'
-import ModalReasonCancel from '../../reasonsCancel/components/ModalReasonCancel'
+import ModalReasonCancel from '../components/reasonsCancel/ModalReasonCancel'
 
 export default {
   components: {

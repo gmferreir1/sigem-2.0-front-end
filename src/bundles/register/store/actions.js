@@ -21,6 +21,26 @@ const getAttendantsScore = async ({commit}, queryParams) => {
 }
 
 /**
+ * Pega os scores de atendimentos do modulo de transferencia
+ * @param commit
+ * @param queryParams
+ * @returns {Promise<*>}
+ */
+const getAttendantsScoreTransfer = async ({commit}, queryParams) => {
+
+  try {
+    const res = await http.get('register/transfer/score-attendant', queryParams)
+    commit('SET_ATTENDANTS_SCORE_TRANSFER', res.data.data)
+
+    return res
+
+  } catch (e) {
+    return e
+  }
+
+}
+
+/**
  * Retorna o ultimo atendente
  * @returns {Promise<*>}
  */
@@ -118,6 +138,7 @@ const getReasonsCancel = async ({commit}) => {
 
 export default {
   getAttendantsScore,
+  getAttendantsScoreTransfer,
   getNextAttendance,
   getReserveContracts,
   getReserveContract,
