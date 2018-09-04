@@ -44,6 +44,29 @@ const SET_REASONS_TRANSFER = (state, objectArray) => {
   state.reasons_transfer = objectArray
 }
 
+const SET_CONTRACTS_TRANSFER = (state, objectArray) => {
+  state.contracts_transfer = objectArray
+}
+
+const SET_EDIT_CONTRACT_TRANSFER_CURRENT = (state, object) => {
+  state.contract_transfer_edit_current = object
+}
+
+const SET_HISTORIC_CONTRACT_TRANSFER = (state, objectArray) => {
+  state.historic_contract_transfer = objectArray
+}
+
+const SET_RESPONSIBLE_CONTRACT_TRANSFER_FILTER = (state, objectArray) => {
+  state.responsible_filter_contracts_transfer = objectArray
+}
+
+const CLEAN_EDIT_CONTRACT_TRANSFER_CURRENT = (state) => {
+  state.contract_transfer_edit_current = {}
+}
+
+const CLEAN_HISTORIC_CONTRACT_TRANSFER = (state) => {
+  state.historic_contract_transfer = []
+}
 
 export default {
   SET_ATTENDANTS_SCORE,
@@ -55,5 +78,11 @@ export default {
   CLEAN_HISTORIC_CONTRACT,
   SET_REASONS_CANCEL,
   SET_ATTENDANTS_SCORE_TRANSFER,
-  SET_REASONS_TRANSFER
+  SET_REASONS_TRANSFER,
+  SET_CONTRACTS_TRANSFER,
+  SET_EDIT_CONTRACT_TRANSFER_CURRENT,
+  SET_HISTORIC_CONTRACT_TRANSFER,
+  SET_RESPONSIBLE_CONTRACT_TRANSFER_FILTER,
+  CLEAN_EDIT_CONTRACT_TRANSFER_CURRENT,
+  CLEAN_HISTORIC_CONTRACT_TRANSFER
 }

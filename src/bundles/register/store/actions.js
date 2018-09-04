@@ -119,8 +119,6 @@ const getReasonsCancel = async ({commit}) => {
 
 
 
-
-
 /**************************************|
  ****** Modulo de transferência *******|
  **************************************|
@@ -164,7 +162,56 @@ const getReasonsTransfer = async ({commit}, queryParams) => {
 
 }
 
+/**
+ * Pega as transferencias
+ * @param commit
+ * @param queryParams
+ * @returns {Promise<*>}
+ */
+const getContractsTransfer = async ({commit}, queryParams) => {
 
+  try {
+    const res = await http.get(`register/transfer/contract`, queryParams)
+    if (!queryParams || !queryParams.params.printer) {
+      commit('SET_CONTRACTS_TRANSFER', res.data.data)
+    }
+
+    return res
+
+  } catch (e) {
+    return e
+  }
+}
+
+const getResponsibleForFilterContractsTransfer = async ({commit}) => {
+
+  try {
+    const res = await http.get(`register/transfer/query/get-all-responsible`)
+    commit('SET_RESPONSIBLE_CONTRACT_TRANSFER_FILTER', res.data)
+    return res
+
+  } catch (e) {
+    return e
+  }
+}
+
+/**
+ * Pega dados de uma transferencia
+ * @param reserveId
+ * @returns {Promise<*>}
+ */
+const getContractTransfer = async ({commit}, reserveId) => {
+
+  try {
+    const res = await http.get(`register/transfer/contract/${reserveId}`)
+    commit('SET_EDIT_CONTRACT_TRANSFER_CURRENT', res.data.transfer)
+    commit('SET_HISTORIC_CONTRACT_TRANSFER', res.data.historic)
+    return res
+
+  } catch (e) {
+    return e
+  }
+}
 
 
 export default {
@@ -175,5 +222,8 @@ export default {
   getResponsibleForFilter,
   getReasonsCancel,
   getAttendantsScoreTransfer,
-  getReasonsTransfer
+  getReasonsTransfer,
+  getContractsTransfer,
+  getContractTransfer,
+  getResponsibleForFilterContractsTransfer
 }
