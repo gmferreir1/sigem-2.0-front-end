@@ -55,7 +55,7 @@ export default {
       })
 
       $('#' + this.id_component).on('change', function(evt, params) {
-        self.$emit('type_immobile', (params ? params.selected : ''))
+        self.$emit('typeImmobile', (params ? params.selected : ''))
       })
 
       setTimeout(() => {

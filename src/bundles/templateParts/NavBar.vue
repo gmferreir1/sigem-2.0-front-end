@@ -15,6 +15,21 @@
       <!-- cadastro -->
       <li>
         <a href="javascript:;">
+          <i class="fa fa-home"></i>
+          <span>Captação</span>
+        </a>
+        <ul class="sub-menu">
+          <li>
+            <router-link :to="{name: 'immobileCaptured.ReportList'}">
+              <span>Relatório Imóveis Captados</span>
+            </router-link>
+          </li>
+        </ul>
+      </li>
+      <!-- / cadastro -->
+      <!-- cadastro -->
+      <li>
+        <a href="javascript:;">
           <i class="fa fa-folder"></i>
           <span>Cadastro</span>
         </a>

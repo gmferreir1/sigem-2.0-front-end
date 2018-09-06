@@ -44,6 +44,12 @@ import Financial from '@bundles/financial/Main'
 import Financial_ContractCelebrated from '@bundles/financial/contractCelebrated/page/Main'
 
 
+/*
+ * Imóveis Captados
+ */
+import ImmobileCaptured from '@bundles/immobileCaptured/Main'
+import ImmobileCapturedReportList from '@bundles/immobileCaptured/report/page/Main'
+
 
 Vue.use(Router)
 
@@ -59,6 +65,22 @@ const router = new Router({
       name: 'dashboard',
       component: Dashboard
     },
+    /**
+     * Imóveis Captados
+     */
+    {
+      path: '/immobile-captured',
+      name: 'immobileCaptured',
+      component: ImmobileCaptured,
+      children: [
+        {
+          path: 'report-list',
+          name: 'immobileCaptured.ReportList',
+          component: ImmobileCapturedReportList
+        }
+      ]
+    },
+
     /**
      * Rescisão de contrato
      */
