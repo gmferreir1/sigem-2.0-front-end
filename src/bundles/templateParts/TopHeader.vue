@@ -13,7 +13,7 @@
       </div>
       <!-- /toggle offscreen menu -->
 
-      <!-- logo -->
+      <!-- logo
       <div class="brand-logo">
         <img src="images/logo-dark.png" height="15" alt="">
       </div>
@@ -33,7 +33,7 @@
     <ul class="nav navbar-nav hidden-xs">
       <li>
         <p class="navbar-text">
-          Blank Page
+          Sistema de Gestão Master RSM Imóveis
         </p>
       </li>
     </ul>
@@ -102,7 +102,7 @@
       <li>
         <a href="javascript:;" data-toggle="dropdown">
           <img src="../../assets/images/avatar.jpg" class="header-avatar img-circle ml10" alt="user" title="user">
-          <span class="pull-left">Samuel Perkins</span>
+          <span class="pull-left">{{wordUpper(userNameLogged)}}</span>
         </a>
         <ul class="dropdown-menu">
           <li>
@@ -142,14 +142,23 @@
 </template>
 
 <script>
-  export default {
-    methods: {
-      logoutSystem () {
-        localStorage.clear()
-        window.location.href = '/'
-      }
+import {wordUpper} from '@/util/stringHelpers'
+
+export default {
+  methods: {
+    wordUpper,
+    logoutSystem () {
+      localStorage.clear()
+      window.location.href = '/'
+    }
+  },
+  computed: {
+    userNameLogged () {
+      const dataUserLogged = JSON.parse(localStorage.getItem('dataUserLogged'))
+      return dataUserLogged.name
     }
   }
+}
 </script>
 
 <style>

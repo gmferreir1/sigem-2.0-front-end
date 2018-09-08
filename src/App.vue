@@ -22,7 +22,8 @@
 
           <!-- logo -->
           <div class="brand-logo">
-            <img src="../src/assets/images/logo.png" height="15" alt="">
+            <img src="../src/assets/images/master_white.png" height="25" alt="">
+
           </div>
           <!-- /logo -->
 

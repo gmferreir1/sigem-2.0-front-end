@@ -24,7 +24,7 @@ http.interceptors.response.use((response) => {
 
   if (error.response.status === 401 && urlCurrent !== 'auth/token') {
     window.localStorage.clear()
-    window.location.href = '/#/auth'
+    window.location.href = '/'
   }
 
   if (error.response.status === 404) {

@@ -18,15 +18,7 @@
     <nav class="footer-left">
       <ul class="nav">
         <li>
-          <a href="javascript:;">Copyright <i class="fa fa-copyright"></i> <span>Urban</span> 2015. All rights reserved</a>
-        </li>
-        <li>
-          <a href="javascript:;">Careers</a>
-        </li>
-        <li>
-          <a href="javascript:;">
-            Privacy Policy
-          </a>
+          <a href="javascript:;">Copyright <i class="fa fa-copyright"></i> <span>SIGEM (Master RSM Imóveis)</span> {{year_current}}. Todos os Direitos Reservados</a>
         </li>
       </ul>
     </nav>
@@ -34,3 +26,13 @@
   </footer>
 
 </template>
+
+<script>
+export default {
+  data () {
+    return {
+      year_current: moment().format('YYYY')
+    }
+  }
+}
+</script>
