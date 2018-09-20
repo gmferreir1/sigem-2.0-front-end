@@ -8,6 +8,7 @@
 import VueFroala from 'vue-froala-wysiwyg';
 
 export default {
+  props: ['setText'],
   name: 'app',
   data () {
     return {
@@ -27,6 +28,9 @@ export default {
   watch: {
     text_editor () {
       this.$emit('textEditor', this.text_editor)
+    },
+    setText () {
+      this.text_editor = this.setText
     }
   },
   mounted () {

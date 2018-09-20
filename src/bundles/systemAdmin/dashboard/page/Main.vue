@@ -36,6 +36,23 @@
       </router-link>
       <!-- / usuários registrados -->
 
+      <!-- controle de cartas -->
+      <router-link :to="{name: 'systemAdmin.ControlLetter'}">
+        <div class="col-md-3" v-loading="load_total_tables_updated" element-loading-text="Consultando dados, aguarde ...">
+          <div class="widget bg-white">
+            <div class="widget-icon bg-orange pull-left fa fa-file"></div>
+            <div class="overflow-hidden">
+              <span class="widget-title">5</span>
+              <span class="widget-subtitle">
+                Cartas e Documentos
+              </span>
+            </div>
+            <br />
+          </div>
+        </div>
+      </router-link>
+      <!-- / usuários registrados -->
+
     </div>
 
   </div>

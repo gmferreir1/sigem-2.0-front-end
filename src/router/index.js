@@ -16,6 +16,7 @@ import SystemAdmin from '@bundles/systemAdmin/Main'
 import SystemAdmin_Dashboard from '@bundles/systemAdmin/dashboard/page/Main'
 import SystemAdmin_User from '@bundles/systemAdmin/user/page/Main'
 import SystemAdmin_UpdateDatabase from '@bundles/systemAdmin/updateDatabase/page/Main'
+import SystemAdmin_Control_Letter from '@bundles/systemAdmin/controlLetter/page/Main'
 
 /*
  * Dashboard
@@ -163,6 +164,11 @@ const router = new Router({
           path: 'update-database',
           name: 'systemAdmin.UpdateDatabase',
           component: SystemAdmin_UpdateDatabase
+        },
+        {
+          path: 'control-letter',
+          name: 'systemAdmin.ControlLetter',
+          component: SystemAdmin_Control_Letter
         }
       ]
     }
@@ -177,6 +183,7 @@ router.beforeEach((to, from, next) => {
   } else if (to.name === 'auth') {
     next()
   } else {
+    window.location.href = '/'
     next(false)
   }
 

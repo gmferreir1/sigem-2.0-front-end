@@ -8,6 +8,7 @@ import Register from '@/bundles/register/store'
 import Financial from '@/bundles/financial/store'
 import Notification from '@/bundles/notification/store'
 import ImmobileCaptured from '@/bundles/immobileCaptured/store'
+import ControlLetter from '@/bundles/systemAdmin/controlLetter/store'
 
 const modules = {
   Auth,
@@ -16,7 +17,8 @@ const modules = {
   Register,
   Financial,
   Notification,
-  ImmobileCaptured
+  ImmobileCaptured,
+  ControlLetter
 }
 
 Vue.use(Vuex)

@@ -134,7 +134,7 @@ export default {
     const channel = this.$pusher.subscribe('systemAction')
 
     channel.bind('App\\Events\\SystemAction', () => {
-      console.log('opa')
+
     })
   }
 }
