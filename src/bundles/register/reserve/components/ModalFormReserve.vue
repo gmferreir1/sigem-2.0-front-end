@@ -14,6 +14,11 @@
                       || contract_edit_current.situation === 'af' || contract_edit_current.situation === 'c'">Salvar Dados</button>
             <!-- / buttons -->
 
+            <!-- botão envio de cartas -->
+            <button class="button btn btn-sm btn-warning" v-if="contract_edit_current.situation === 'as' || contract_edit_current.situation === 'ap'
+                      || contract_edit_current.situation === 'af'" @click="$emit('openModalSendLetters', contract_edit_current)">Envio de cartas</button>
+            <!-- /botão envio de cartas -->
+
             <!-- buttons -->
             <button class="button btn btn-sm btn-primary" @click="printRecordLocation" v-if="$store.state.Register.contract_edit_current.id"
               :disabled="contract_edit_current.situation === 'c'">

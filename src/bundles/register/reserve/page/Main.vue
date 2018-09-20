@@ -10,7 +10,8 @@
 
     <!-- modal formulário de reserva -->
     <modal-form-reserve :dataModal="data_modal_form_reserve"
-      @openModalWarnClient="data => data_modal_warn_client = {data}"/>
+      @openModalWarnClient="data => data_modal_warn_client = {data}"
+      @openModalSendLetters="data_contract => data_modal_send_letters = {data_contract}"/>
     <!-- modal formulário de reserva -->
 
     <!-- modal avisando o cliente que o codigo do imovel esta ativo a ponto tempo no sistema -->
@@ -41,6 +42,14 @@
     <modal-reason-cancel :dataModal="data_modal_reason_cancel" />
     <!-- / modal motivos cancelamento -->
 
+    <!-- modal envio de cartas -->
+    <modal-send-letters :dataModal="data_modal_send_letters" />
+    <!-- / modal envio de cartas -->
+
+    <!-- modal dados da carta -->
+    <modal-letter-data />
+    <!-- / modal dados da carta -->
+
   </div>
 
 </template>
@@ -55,6 +64,8 @@ import ModalFinancialFinalData from '../components/ModalFinancialFinalData'
 import ModalSendEmailCloseReserve from '../components/ModalSendEmailCloseReserve'
 import ModalSelectTypePrint from '../components/ModalSelectTypePrint'
 import ModalReasonCancel from '../components/reasonsCancel/ModalReasonCancel'
+import ModalSendLetters from '../components/ModalSendLetters'
+import ModalLetterData from '../components/ModalLetterData'
 
 export default {
   components: {
@@ -66,7 +77,9 @@ export default {
     ModalFinancialFinalData,
     ModalSendEmailCloseReserve,
     ModalSelectTypePrint,
-    ModalReasonCancel
+    ModalReasonCancel,
+    ModalSendLetters,
+    ModalLetterData
   },
   data () {
     return {
@@ -74,12 +87,8 @@ export default {
       data_modal_warn_client: {},
       data_modal_score_attendance: {},
       data_open_modal_select_type_print: {},
-      data_modal_reason_cancel: {}
-    }
-  },
-  methods: {
-    openModalScore () {
-      console.log('sss')
+      data_modal_reason_cancel: {},
+      data_modal_send_letters: {}
     }
   }
 }
