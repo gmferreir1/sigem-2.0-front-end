@@ -38,11 +38,11 @@
 
       <!-- controle de cartas -->
       <router-link :to="{name: 'systemAdmin.ControlLetter'}">
-        <div class="col-md-3" v-loading="load_total_tables_updated" element-loading-text="Consultando dados, aguarde ...">
+        <div class="col-md-3" v-loading="load_total_letters" element-loading-text="Consultando dados, aguarde ...">
           <div class="widget bg-white">
             <div class="widget-icon bg-orange pull-left fa fa-file"></div>
             <div class="overflow-hidden">
-              <span class="widget-title">5</span>
+              <span class="widget-title">{{total_letters_registered}}</span>
               <span class="widget-subtitle">
                 Cartas e Documentos
               </span>
@@ -67,7 +67,9 @@ export default {
     return {
       load_total_users: true,
       load_total_tables_updated: true,
+      load_total_letters: true,
       total_users_registered: 0,
+      total_letters_registered: 0,
       date_last_update_table: ''
     }
   },
@@ -99,11 +101,25 @@ export default {
       }).catch(() => {
         this.load_total_tables_updated = false
       })
+    },
+    getTotalLetters () {
+      http.get('control-letter/query-total-letters-registered').then(res => {
+
+        this.total_letters_registered = res.data
+
+        setTimeout(() => {
+          this.load_total_letters = false
+        }, 600)
+
+      }).catch(() => {
+        this.load_total_letters = false
+      })
     }
   },
   mounted () {
     this.getTotalUsersRegistered()
     this.getTotalTablesUpdate()
+    this.getTotalLetters()
   }
 }
 </script>
