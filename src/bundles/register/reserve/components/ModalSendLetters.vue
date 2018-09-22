@@ -24,8 +24,13 @@
                 <tbody>
 
                 <tr>
-                  <td class="text-left">Email de aviso ao locador dos dados do contrato</td>
-                  <td class="text-left"> - </td>
+                  <td class="text-left">{{data_emails.owner_contract.letter_name.toUpperCase()}}</td>
+                  <td class="text-left" :title="wordUpper(data_emails.owner_contract.rp_last_action)">
+                    <span v-if="data_emails.owner_contract.rp_last_action">
+                      {{dateFormat(data_emails.owner_contract.date_last_update, 'DD/MM/YYYY HH:mm:ss')}}, por {{wordUpper(strLimit(data_emails.owner_contract.rp_last_action, 12))}}
+                    </span>
+                    <span v-else> - </span>
+                  </td>
                   <td class="text-center">
                     <a href="#" title="Enviar email" @click.prevent="getEmailDataForSend('email_send_owner')">
                       <i class="fa fa-send orange"></i>
@@ -34,20 +39,30 @@
                 </tr>
 
                 <tr>
-                  <td class="text-left">Email de boas vindas ao locatário</td>
-                  <td class="text-left"> - </td>
+                  <td class="text-left">{{data_emails.welcome_tenant.letter_name.toUpperCase()}}</td>
+                  <td class="text-left" :title="wordUpper(data_emails.welcome_tenant.rp_last_action)">
+                    <span v-if="data_emails.welcome_tenant.rp_last_action">
+                      {{dateFormat(data_emails.welcome_tenant.date_last_update, 'DD/MM/YYYY HH:mm:ss')}}, por {{wordUpper(strLimit(data_emails.welcome_tenant.rp_last_action, 12))}}
+                    </span>
+                    <span v-else> - </span>
+                  </td>
                   <td class="text-center">
-                    <a href="#" title="Enviar email">
+                    <a href="#" title="Enviar email" @click.prevent="getEmailDataForSend('email_send_tenant')">
                       <i class="fa fa-send orange"></i>
                     </a>
                   </td>
                 </tr>
 
                 <tr>
-                  <td class="text-left">Email ao condomínio dados do contrato (se existir)</td>
-                  <td class="text-left"> - </td>
+                  <td class="text-left">{{data_emails.condominium_contract.letter_name.toUpperCase()}}</td>
+                  <td class="text-left" :title="wordUpper(data_emails.condominium_contract.rp_last_action)">
+                    <span v-if="data_emails.condominium_contract.rp_last_action">
+                      {{dateFormat(data_emails.condominium_contract.date_last_update, 'DD/MM/YYYY HH:mm:ss')}}, por {{wordUpper(strLimit(data_emails.condominium_contract.rp_last_action, 12))}}
+                    </span>
+                    <span v-else> - </span>
+                  </td>
                   <td class="text-center">
-                    <a href="#" title="Enviar email">
+                    <a href="#" title="Enviar email" @click.prevent="getEmailDataForSend('email_send_condominium')">
                       <i class="fa fa-send orange"></i>
                     </a>
                   </td>
@@ -72,6 +87,9 @@
 <script>
 import ModalHeader from '@/components/ModalHeader'
 import ModalFooter from '@/components/ModalFooter'
+import {dateFormat} from '@/util/dateTime'
+import {strLimit, wordUpper} from '@/util/stringHelpers'
+
 export default {
   props: ['dataModal'],
   components: {
@@ -80,10 +98,42 @@ export default {
   },
   data () {
     return {
-      load_data: false
+      load_data: false,
+      data_emails: {
+        owner_contract: {
+          letter_name: ''
+        },
+        condominium_contract: {
+          letter_name: ''
+        },
+        welcome_tenant: {
+          letter_name: ''
+        }
+      }
     }
   },
   methods: {
+    dateFormat,
+    strLimit,
+    wordUpper,
+    /**
+     * Verifica os dados do email enviado, como data e responsável.
+     */
+    queryEmailsSend () {
+      this.load_data = true
+
+      http.get(`register/reserve-contract/query/email-letters/${this.dataModal.data_contract.id}`).then(res => {
+
+        this.data_emails = res.data
+
+        setTimeout(() => {
+          this.load_data = false
+        }, 600)
+
+      }).catch(() => {
+        this.load_data = false
+      })
+    },
     openModal() {
       $('#modalSendLetters').modal({
         keyboard: false,
@@ -92,14 +142,14 @@ export default {
     },
     getEmailDataForSend (typeEmail) {
 
-      this.load_data = true
-
       const queryParams = {
         params: {
           type_email: typeEmail,
           reserve_id: this.dataModal.data_contract.id
         }
       }
+
+      this.load_data = true
 
       http.get('register/reserve-contract/email-data', queryParams).then(res => {
 
@@ -119,8 +169,14 @@ export default {
   },
   watch: {
     dataModal () {
+      this.queryEmailsSend()
       this.openModal()
     }
+  },
+  mounted () {
+    this.$bus.$on('Register\Reserve:refreshDataEmailSend', () => {
+      this.queryEmailsSend()
+    })
   }
 }
 </script>
