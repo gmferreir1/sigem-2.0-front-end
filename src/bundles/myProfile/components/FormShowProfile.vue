@@ -4,40 +4,48 @@
 
     <div class="panel-body">
 
-      <div class="row">
-        <div class="col-md-3 col-lg-2">
-          <label>Primeiro Nome</label>
-          <input type="text" class="form-control input-sm" v-model="form.name" disabled>
+      <form @submit.prevent="submitForm">
+
+        <div class="row">
+          <div class="col-md-3 col-lg-2">
+            <label>Primeiro Nome</label>
+            <input type="text" class="form-control input-sm" v-model="form.name" disabled>
+          </div>
+
+          <div class="col-md-4 col-lg-3">
+            <label>Sobrenome</label>
+            <input type="text" class="form-control input-sm" v-model="form.last_name" disabled>
+          </div>
+
+          <div class="col-md-4 col-lg-3">
+            <label>Email de Acesso</label>
+            <input type="text" class="form-control input-sm" v-model="form.email" disabled>
+          </div>
         </div>
 
-        <div class="col-md-4 col-lg-3">
-          <label>Sobrenome</label>
-          <input type="text" class="form-control input-sm" v-model="form.last_name" disabled>
+        <div class="row" style="margin-top: 10px">
+
+          <div class="col-md-3 col-lg-2" :class="{error: validation.hasError('form.password'), 'has-error': validation.hasError('form.password')}">
+            <label>Senha <span class="required">*</span></label>
+            <input type="password" class="form-control input-sm" v-model="form.password">
+            <div class="message">{{ validation.firstError('form.password') }}</div>
+          </div>
+
+          <div class="col-md-3 col-lg-2" :class="{error: validation.hasError('form.password_confirmation'), 'has-error': validation.hasError('form.password_confirmation')}">
+            <label>Repita a Senha <span class="required">*</span></label>
+            <input type="password" class="form-control input-sm" v-model="form.password_confirmation">
+            <div class="message">{{ validation.firstError('form.password_confirmation') }}</div>
+          </div>
+
         </div>
 
-        <div class="col-md-4 col-lg-3">
-          <label>Email de Acesso</label>
-          <input type="text" class="form-control input-sm" v-model="form.email" disabled>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 10px">
-        <div class="col-md-3 col-lg-2">
-          <label>Senha</label>
-          <input type="password" class="form-control input-sm">
+        <div class="row" style="margin-top: 10px">
+          <div class="col-md-12">
+            <button class="button btn btn-danger btn-sm" type="submit">Salvar Dados</button>
+          </div>
         </div>
 
-        <div class="col-md-3 col-lg-2">
-          <label>Repita a senha</label>
-          <input type="password" class="form-control input-sm">
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 10px">
-        <div class="col-md-12">
-          <button class="button btn btn-danger btn-sm" type="submit">Salvar Dados</button>
-        </div>
-      </div>
+      </form>
 
       <!-- upload avatar -->
 
@@ -68,10 +76,7 @@
         </div>
 
       </div>
-
       <!-- / upload avatar -->
-
-
 
     </div>
 
@@ -80,6 +85,8 @@
 </template>
 
 <script>
+
+import {wordUpper} from '@/util/stringHelpers'
 
 export default {
   data () {
@@ -96,7 +103,25 @@ export default {
       }
     }
   },
+  validators: {
+    'form.name': function (value) {
+      return Validator.value(value).required('Obrigatório')
+    },
+    'form.last_name': function (value) {
+      return Validator.value(value).required('Obrigatório')
+    },
+    'form.email': function (value) {
+      return Validator.value(value).required('Obrigatório').email('Email inválido')
+    },
+    'form.password': function (value) {
+      return Validator.value(value).required('Obrigatório').minLength(6, 'Minímo 6 caracteres')
+    },
+    'form.password_confirmation, form.password': function (repeat, password) {
+      return Validator.value(repeat).required('Obrigatório').minLength(6, 'Minímo 6 caracteres').match(password, 'Senhas não conferem')
+    }
+  },
   methods: {
+    wordUpper,
     attachmentFile(e) {
 
       this.files =  e.target[0].files
@@ -159,7 +184,60 @@ export default {
       }).catch(() => {
         this.load_data = false
       })
+    },
+    getUserData () {
+
+      const userLoggedData = JSON.parse(localStorage.getItem('dataUserLogged'))
+
+      if (userLoggedData) {
+        http.get(`user/${userLoggedData.id}`).then(res => {
+
+          this.form.id = res.data.id
+          this.form.name = wordUpper(res.data.name)
+          this.form.last_name = wordUpper(res.data.last_name)
+          this.form.email = res.data.email
+          this.form.password = 'no_change_password'
+          this.form.password_confirmation = 'no_change_password'
+
+          setTimeout(() => {
+            this.load_data = false
+          }, 600)
+
+        }).catch(() => {
+          this.load_data = false
+        })
+      }
+    },
+    submitForm () {
+      const self = this
+      this.$validate()
+      .then(function (success) {
+        if (success) {
+          self.update()
+        }
+      })
+    },
+    update () {
+      this.load_data = true
+      http.put(`user/profile/${this.form.id}`, this.form).then(res => {
+        _notification.success()
+
+        this.cleanForm()
+        this.getAllUsers()
+
+        setTimeout(() => {
+          this.load_data = false
+        }, 600)
+
+      }).catch(() => {
+        setTimeout(() => {
+          this.load_data = false
+        }, 300)
+      })
     }
+  },
+  mounted () {
+    this.getUserData()
   }
 }
 </script>
