@@ -22,7 +22,7 @@ http.interceptors.response.use((response) => {
 
   const urlCurrent = url(error.response.config.baseURL, error.response.config.url)
 
-  if (error.response.status === 401 && urlCurrent !== 'auth/token') {
+  if (error.response.status === 401 && urlCurrent !== '/oauth/token') {
     window.localStorage.clear()
     window.location.href = '/'
   }

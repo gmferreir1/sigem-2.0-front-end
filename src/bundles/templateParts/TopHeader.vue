@@ -101,7 +101,10 @@
 
       <li>
         <a href="javascript:;" data-toggle="dropdown">
-          <img src="../../assets/images/avatar.jpg" class="header-avatar img-circle ml10" alt="user" title="user">
+          <img :src="image_profile" class="header-avatar img-circle ml10" alt="user" title="user" v-if="!load_avatar">
+          <span v-if="load_avatar">
+            <img :src="spinner" alt="" style="margin-top: -6px; margin-left: 10px">
+          </span>
           <span class="pull-left">{{wordUpper(userNameLogged)}}</span>
         </a>
         <ul class="dropdown-menu">
@@ -111,16 +114,9 @@
             </router-link>
           </li>
           <li>
-            <a href="javascript:;">Upgrade</a>
-          </li>
-          <li>
-            <a href="javascript:;">
-              <span class="label bg-danger pull-right">34</span>
-              <span>Notifications</span>
-            </a>
-          </li>
-          <li>
-            <a href="javascript:;">Help</a>
+            <router-link :to="{name: 'myProfile'}">
+              Meu Perfil
+            </router-link>
           </li>
           <li>
             <a href="#" @click.prevent="logoutSystem">Logout</a>
@@ -145,11 +141,27 @@
 import {wordUpper} from '@/util/stringHelpers'
 
 export default {
+  data () {
+    return {
+      image_profile: '',
+      load_avatar: false,
+      spinner: require('@/assets/images/loading.gif')
+    }
+  },
   methods: {
     wordUpper,
     logoutSystem () {
       localStorage.clear()
       window.location.href = '/'
+    },
+    setImageProfile () {
+      this.load_avatar = true
+      const dataUserLogged = JSON.parse(localStorage.getItem('dataUserLogged'))
+      this.image_profile = dataUserLogged.image_profile
+
+      setTimeout(() => {
+        this.load_avatar = false
+      }, 600)
     }
   },
   computed: {
@@ -157,6 +169,13 @@ export default {
       const dataUserLogged = JSON.parse(localStorage.getItem('dataUserLogged'))
       return dataUserLogged.name
     }
+  },
+  mounted () {
+    this.setImageProfile()
+
+    this.$bus.$on('TemplateParts\TopHeader:LoadAvatar', () => {
+      this.setImageProfile()
+    })
   }
 }
 </script>
@@ -165,6 +184,12 @@ export default {
 
   .main-panel > .header {
     background-color: #E98531;
+  }
+
+  .main-panel > .header .header-avatar {
+    width: 45px;
+    max-height: 45px;
+    margin-top: -12px;
   }
 
 

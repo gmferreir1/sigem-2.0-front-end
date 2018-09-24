@@ -70,21 +70,33 @@
           </thead>
           <tbody>
           <tr v-for="list in data_list.data">
-            <td>{{wordUpper(list.name)}}</td>
-            <td>{{list.email}}</td>
             <td>
-              <span :class="{error: list.type_profile === 'admin'}">
-                {{wordUpper(list.type_profile)}}
-              </span>
+              <a href="" @click.prevent="edit(list)">
+                {{wordUpper(list.name)}}
+              </a>
             </td>
             <td>
-              <span :class="{error: !list.status, success: list.status}">
-                {{list.status ? 'Ativo' : 'Inativo'}}
-              </span>
+              <a href="" @click.prevent="edit(list)">
+                {{list.email}}
+              </a>
+            </td>
+            <td>
+              <a href="" @click.prevent="edit(list)">
+                <span :class="{error: list.type_profile === 'admin'}">
+                  {{wordUpper(list.type_profile)}}
+                </span>
+              </a>
+            </td>
+            <td>
+              <a href="#" @click.prevent="edit(list)">
+                <span :class="{error: !list.status, success: list.status}">
+                  {{list.status ? 'Ativo' : 'Inativo'}}
+                </span>
+              </a>
             </td>
             <td class="text-center width-edit">
               <a href="" @click.prevent="edit(list)">
-                <i class="fa fa-pencil size-icon-table"></i>
+                <i class="fa fa-pencil size-icon-table orange"></i>
               </a>
             </td>
           </tr>

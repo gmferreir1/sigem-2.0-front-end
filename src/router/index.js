@@ -52,6 +52,12 @@ import ImmobileCaptured from '@bundles/immobileCaptured/Main'
 import ImmobileCapturedReportList from '@bundles/immobileCaptured/report/page/Main'
 
 
+/*
+ * My Profile
+ */
+import MyProfile from '@bundles/myProfile/page/Main'
+
+
 Vue.use(Router)
 
 const router = new Router({
@@ -171,6 +177,14 @@ const router = new Router({
           component: SystemAdmin_Control_Letter
         }
       ]
+    },
+    /**
+     * My Profile
+     */
+    {
+      path: '/my-profile',
+      name: 'myProfile',
+      component: MyProfile
     }
   ]
 })
@@ -183,7 +197,7 @@ router.beforeEach((to, from, next) => {
   } else if (to.name === 'auth') {
     next()
   } else {
-    window.location.href = '/'
+    //window.location.href = '/'
     next(false)
   }
 

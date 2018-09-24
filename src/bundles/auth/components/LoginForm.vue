@@ -112,6 +112,7 @@
             dataUserLogged.name = res.data.name
             dataUserLogged.last_name = res.data.last_name
             dataUserLogged.email = res.data.email
+            dataUserLogged.image_profile = res.data.image_profile
           }
 
           localStorage.setItem('dataUserLogged', JSON.stringify(dataUserLogged))
