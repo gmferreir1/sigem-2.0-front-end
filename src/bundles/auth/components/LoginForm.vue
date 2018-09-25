@@ -8,30 +8,76 @@
           <div class="row">
             <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
 
-              <form role="form" @submit.prevent="doLogin" class="form-layout">
+              <form role="form" @submit.prevent class="form-layout" style="background-color: #ffffff; border-radius: 2%">
 
-                <div class="text-center mb15">
-                  <img src="../../../assets/images/logo-dark.png"/>
+
+                <!-- form login -->
+                <div v-if="show_form_login && !email_recovery_send">
+
+                  <div class="text-center">
+                    <div>
+                      <img :src="images.logo" height="40"/>
+                    </div>
+                    Bem vindo ao Sistema de Gestão Master
+                  </div>
+
+                  <div class="form-inputs">
+                    <input type="email" class="form-control input-lg" v-model="form.username" placeholder="Email">
+                    <input type="password" class="form-control input-lg" v-model="form.password" placeholder="Senha" @keypress.enter="doLogin">
+                  </div>
+
+                  <p v-if="error_login">
+                    <span style="font-weight: bold; color: red">Erro: {{error_login}}</span>
+                  </p>
+
+                  <button class="btn btn-success btn-block btn-lg mb15" type="button" :disabled="!form.username || !form.password" @click="doLogin">
+                    <span>Efetuar Login</span>
+                  </button>
+
+                  <p>
+                    <a href="#" @click.prevent="(show_form_login = false), email_recovery = form.username">Esqueceu a senha?</a>
+                  </p>
+
                 </div>
+                <!-- / form login -->
 
-                <p class="text-center mb30">Welcome to Urban. Please sign in to your account</p>
+                <!-- form send email -->
+                <div v-if="!show_form_login && !email_recovery_send">
 
-                <div class="form-inputs">
-                  <input type="email" class="form-control input-lg" v-model="form.username" placeholder="Email">
-                  <input type="password" class="form-control input-lg" v-model="form.password" placeholder="Senha">
+                  <div class="text-center">
+                    <div>
+                      <img :src="images.logo" height="40"/>
+                    </div>
+                    Informe o email cadastrado no sistema
+                  </div>
+
+                  <div class="form-inputs">
+                    <input type="email" class="form-control input-lg" v-model="email_recovery" placeholder="Email de recuperação" @keypress.enter="sendEmailRecoveryPassword">
+                  </div>
+
+
+                  <button class="btn btn-success btn-block btn-lg mb15" type="button" :disabled="!email_recovery" @click="sendEmailRecoveryPassword">
+                    <span>Enviar Email</span>
+                  </button>
+
+                  <p>
+                    <a href="#" @click.prevent="show_form_login = true">Voltar tela de login</a>
+                  </p>
+
                 </div>
+                <!-- / form send email -->
 
-                <p v-if="error_login">
-                  <span style="font-weight: bold; color: red">Erro: {{error_login}}</span>
-                </p>
-
-                <button class="btn btn-success btn-block btn-lg mb15" type="submit">
-                  <span>Sign in</span>
-                </button>
-
-                <p>
-                  <a href="#" @click.prevent>Esqueceu a senha?</a>
-                </p>
+                <!-- message check email -->
+                <div class="text-center" v-if="email_recovery_send">
+                  <p>Foi enviado um email de recuperação de senha para: {{email_recovery}}</p>
+                  <p>Verifique e siga os passos para alterar a senha</p>
+                  <p>
+                    <a href="#" @click.prevent="reset">
+                      <span style="color: orange">Voltar a tela de login</span>
+                    </a>
+                  </p>
+                </div>
+                <!-- / message check email -->
 
               </form>
             </div>
@@ -54,7 +100,13 @@
           username: '',
           password: ''
         },
-        error_login: ''
+        error_login: '',
+        show_form_login: true,
+        email_recovery: '',
+        email_recovery_send: false,
+        images: {
+          logo: require('@/assets/images/master.png')
+        }
       }
     },
     methods: {
@@ -62,6 +114,11 @@
        * Efetua o login no sistema
        */
       doLogin () {
+
+        if (!this.form.username || !this.form.password) {
+          return
+        }
+
         this.error_login = ''
 
         this.message_load = 'Efetuando login, aguarde ....'
@@ -125,6 +182,43 @@
           _notification.error('Erro ao buscar dados do usuário !')
         })
 
+      },
+      /**
+       * Envio de email para recuperação de senha
+       */
+      sendEmailRecoveryPassword () {
+        this.message_load = 'Enviando email, aguarde ...'
+        this.load_data = true
+
+        const queryParams = {
+          params: {
+            email: this.email_recovery
+          }
+        }
+
+        http.get('external-access/recovery-password/send-email', queryParams).then(res => {
+
+          setTimeout(() => {
+            this.email_recovery_send = true
+            this.load_data = false
+          }, 600)
+
+        }).catch(() => {
+          this.load_data = false
+        })
+      },
+      reset () {
+        this.show_form_login = true
+        this.email_recovery = ''
+        this.email_recovery_send = false
+      }
+    },
+    watch: {
+      'form.username' () {
+        this.error_login = false
+      },
+      'form.password' () {
+        this.error_login = false
       }
     }
   }

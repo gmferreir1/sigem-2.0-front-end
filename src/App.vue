@@ -117,6 +117,15 @@ export default {
     // verifica qual rota esta
     const route = this.$route
 
+
+    /*
+     * Recuperação se senha
+     */
+    if (route.name === 'changePassword' && route.query.token) {
+      return
+    }
+
+
     if (route.name != 'auth') {
 
       const dataUserLogged = localStorage.getItem('dataUserLogged') ? JSON.parse(localStorage.getItem('dataUserLogged')) : null

@@ -74,6 +74,18 @@ label {
   }
 }
 
+
+
+/*
+ * modals
+ */
+@media (min-width: 200px) {
+  .modal-sm {
+    width: 30% !important;
+  }
+}
+
+
 /* chosen select */
 .chosen-drop .chosen-results {
   max-height: 150px;

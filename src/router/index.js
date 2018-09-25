@@ -57,6 +57,11 @@ import ImmobileCapturedReportList from '@bundles/immobileCaptured/report/page/Ma
  */
 import MyProfile from '@bundles/myProfile/page/Main'
 
+/*
+ * Change Password
+ */
+import ChangePassword from '@bundles/changePassword/page/Main'
+
 
 Vue.use(Router)
 
@@ -185,6 +190,14 @@ const router = new Router({
       path: '/my-profile',
       name: 'myProfile',
       component: MyProfile
+    },
+    /**
+     * Alteração de senha
+     */
+    {
+      path: '/change-password',
+      name: 'changePassword',
+      component: ChangePassword
     }
   ]
 })
@@ -194,7 +207,11 @@ router.beforeEach((to, from, next) => {
 
   if (to.name != 'auth' && checkIsLogged.check()) {
     next()
-  } else if (to.name === 'auth') {
+  }
+  else if (to.name === 'changePassword') {
+    next()
+  }
+  else if (to.name === 'auth') {
     next()
   } else {
     //window.location.href = '/'
