@@ -95,10 +95,26 @@ require('../node_modules/froala-editor/css/froala_style.min.css')
 import VueFroala from 'vue-froala-wysiwyg'
 Vue.use(VueFroala)
 
+
+/*
+ * HighCharts
+ */
+window.Highcharts = require('highcharts')
+
+// Load module after Highcharts is loaded
+require('highcharts/modules/exporting')(Highcharts)
+
+Highcharts.setOptions({
+  lang: {
+    decimalPoint: ',',
+    thousandsSep: '.'
+  }
+})
+
+
 /*
  * Pusher
  */
-
 const vuePuser = require('vue-pusher')
 
 Vue.use(vuePuser, {
