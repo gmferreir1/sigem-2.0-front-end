@@ -1,6 +1,6 @@
 <template>
 
-  <div class="panel" v-loading="load_data" :element-loading-text="load_data_message">
+  <div class="panel" v-loading="load_data" element-loading-text="Carregando dados, aguarde ...">
 
 
     <div class="panel-heading">
@@ -189,6 +189,8 @@ export default {
   },
   mounted () {
 
+    this.load_data = true
+
     const queryParams = {
       params: {
         init_date: window.moment().startOf('month').format('DD/MM/YYYY'),
@@ -196,7 +198,9 @@ export default {
       }
     }
 
-    this.getListReportImmobileCaptured(queryParams)
+    this.getListReportImmobileCaptured(queryParams).catch(() => {
+      this.load_data = false
+    })
   }
 }
 </script>

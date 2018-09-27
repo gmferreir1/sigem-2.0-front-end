@@ -15,7 +15,7 @@ const getListReportImmobileCaptured = async ({commit}, queryParams) => {
     return res
 
   } catch (e) {
-    return e
+    reject(e)
   }
 }
 
