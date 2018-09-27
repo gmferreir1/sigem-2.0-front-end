@@ -6,10 +6,10 @@
 
       <!-- dashboard -->
       <li>
-        <a href="index.html">
-          <i class="fa fa-flask"></i>
+        <router-link :to="{name: 'dashboard'}">
+          <i class="fa fa-line-chart"></i>
           <span>Dashboard</span>
-        </a>
+        </router-link>
       </li>
       <!-- /dashboard -->
       <!-- cadastro -->

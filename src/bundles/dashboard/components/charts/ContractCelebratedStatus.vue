@@ -1,6 +1,9 @@
 <template>
 
-  <div id="containerGraphStatus" style="min-width: 310px; height: 400px; max-width: 600px"  v-loading="load_data" element-loading-text="Carregando dados do grafico, aguarde ..."></div>
+
+  <div v-loading="load_data" element-loading-text="Carregando dados do grafico, aguarde ...">
+    <div id="containerGraphStatus" style="min-width: 310px; height: 400px; max-width: 600px"></div>
+  </div>
 
 </template>
 
@@ -26,7 +29,8 @@ export default {
           type: 'pie'
         },
         title: {
-          text: `Contratos Celebrados por Status Mês de <span style="font-weight: bold; color: orange">${self.month_data}</span>`
+          text: `<span style="font-size: 12px">Contratos Celebrados por Status Mês de </span> <span style="font-weight: bold; color: orange">${self.month_data}</span>`,
+          align: 'left'
         },
         credits: {
           enabled: false

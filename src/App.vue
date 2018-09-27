@@ -22,7 +22,10 @@
 
           <!-- logo -->
           <div class="brand-logo">
-            <img src="../src/assets/images/master_white.png" height="25" alt="">
+
+            <router-link :to="{name: 'dashboard'}">
+              <img src="../src/assets/images/master_white.png" height="25" alt="">
+            </router-link>
 
           </div>
           <!-- /logo -->

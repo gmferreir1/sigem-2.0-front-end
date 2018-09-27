@@ -1,18 +1,61 @@
 <template>
 
-  <div id="container" style="min-width: 310px; height: 400px; max-width: 600px; width: 600px"  v-loading="load_data" element-loading-text="Carregando dados do grafico, aguarde ..."></div>
+  <div v-loading="load_data" element-loading-text="Carregando dados do grafico, aguarde ...">
+
+    <div class="row" v-if="not_show_graph">
+      <div class="col-md-12">
+        <div class="panel">
+
+          <div class="panel-body">
+
+            <img :src="images.find_graph"/>
+
+            <span v-html="message"></span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+
+    <div id="container" v-show="!not_show_graph" style="min-width: 310px; height: 400px; max-width: 600px"></div>
+
+    <div style="position: absolute; top: 40px; left: 20px" v-if="!load_data">
+      <button class="button btn btn-primary btn-sm" @click="getDataGraph">Alterar tipo meta para {{type_goal === 'percent' ? 'Valor' : 'Percentual'}}</button>
+    </div>
+
+  </div>
 
 </template>
 
 <script>
+import {wordUpper, moneyFormat} from '@/util/stringHelpers'
+
 export default {
   data () {
     return {
-      load_data: true
+      load_data: true,
+      not_show_graph: false,
+      data_graph: [],
+      month_data: '',
+      goal: '',
+      type_goal: 'percent',
+      images: {
+        find_graph: require('@assets/images/find_graph.png')
+      }
     }
   },
   methods: {
+    wordUpper,
+    moneyFormat,
     renderGraph () {
+
+      const self = this
+
       window.Highcharts.chart('container', {
         chart: {
           plotBackgroundColor: null,
@@ -26,57 +69,87 @@ export default {
           enabled: false
         },
         title: {
-          text: 'Contratos Celebrados Setembro 2018',
-          align: 'center',
-          verticalAlign: 'top',
-          y: 60
+          text: `<span style="font-size: 13px">Contratos Celebrados </span>
+                  <span style="font-weight: bold; color: #E98531">${self.wordUpper(self.month_data)}</span>
+                 - <span style="font-size: 11px; color: red">META R$ ${moneyFormat(self.goal)}</span>
+                  <span style="font-size: 11px">(Mínimo)</span>`,
+          align: 'left'
         },
         tooltip: {
-          pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          valueDecimals: 2,
+          valuePrefix: 'R$ '
         },
         plotOptions: {
           pie: {
-            selected: false,
-            startAngle: -90,
-            endAngle: 90,
-            innerSize: '80%',
-            showInLegend: false,
+            allowPointSelect: true,
+            cursor: 'pointer',
             dataLabels: {
               enabled: true,
-              distance: -50,
               style: {
-                fontWeight: 'bold',
-                color: 'white'
+                color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+              },
+              formatter: function () {
+                return '<b>' + this.point.name + '</b>: R$ ' + Highcharts.numberFormat(this.y, 2, ',', '.');
               }
             },
-            startAngle: -90,
-            endAngle: 90,
-            center: ['50%', '75%']
+            showInLegend: true
           }
         },
         series: [{
           type: 'pie',
-          data: [
-            {
-              name: 'Meta Cumprida',
-              y: 80,
-              color: 'green'
-            },
-            {
-              name: 'Meta a Cumprir',
-              y: 20,
-              color: 'red'
-            },
-          ]
+          data: self.data_graph
         }]
+      })
+    },
+    getDataGraph () {
+
+     this.type_goal = this.type_goal === 'percent' ? this.type_goal = 'value' :  this.type_goal = 'percent'
+
+      const queryParams = {
+        params: {
+          type_goal: this.type_goal
+        }
+      }
+
+      http.get('dashboard/data-graph/contracts-celebrated', queryParams).then(res => {
+
+        if (res.data.error) {
+          const message = res.data.message
+
+          if (message === 'no goals found') {
+            this.message = `Nenhuma meta definida no sistema !
+                            <div style="margin-left: 35px; font-weight: bold">Defina uma meta para continuar</div>`
+            this.not_show_graph = true
+            this.load_data = false
+          }
+
+          if (message === 'no goal percent found') {
+            this.message = `Nenhuma meta de percentual definida !
+                            <div style="margin-left: 35px; font-weight: bold">Defina uma meta para continuar</div>`
+            this.not_show_graph = true
+            this.load_data = false
+          }
+        }
+
+        this.data_graph = res.data.data
+        this.month_data = res.data.month
+        this.goal = res.data.goal
+
+        this.renderGraph()
+
+        setTimeout(() => {
+          this.load_data = false
+        }, 1200)
+
+      }).catch((err) => {
+        console.log(err)
+        this.load_data = false
       })
     }
   },
   mounted () {
-    this.renderGraph()
-    setTimeout(() => {
-      this.load_data = false
-    }, 1200)
+    this.load_data = true
+    this.getDataGraph()
   }
 }
 </script>

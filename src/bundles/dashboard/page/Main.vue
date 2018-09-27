@@ -3,7 +3,7 @@
   <div>
 
     <div class="row">
-      <div class="col-md-4" style="margin-right: 50px">
+      <div class="col-md-6">
         <contract-celebrated-charts />
       </div>
 
@@ -28,3 +28,10 @@ export default {
   }
 }
 </script>
+
+<style>
+  html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+</style>
