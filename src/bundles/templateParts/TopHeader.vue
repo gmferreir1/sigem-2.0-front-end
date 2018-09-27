@@ -13,12 +13,6 @@
       </div>
       <!-- /toggle offscreen menu -->
 
-      <!-- logo
-      <div class="brand-logo">
-        <img src="images/logo-dark.png" height="15" alt="">
-      </div>
-      <!-- /logo -->
-
       <!-- toggle chat sidebar small screen-->
       <div class="toggle-chat">
         <a href="javascript:;" class="hamburger-icon v2 visible-xs" data-toggle="layout-chat-open">
@@ -39,11 +33,6 @@
     </ul>
 
     <ul class="nav navbar-nav navbar-right hidden-xs">
-      <li>
-        <a href="javascript:;" data-toggle="quick-launch-panel">
-          <i class="fa fa-circle-thin"></i>
-        </a>
-      </li>
 
       <li>
         <a href="javascript:;" data-toggle="dropdown">

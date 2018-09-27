@@ -24,7 +24,7 @@
               <label>Tipo de Meta <span class="required">*</span></label>
               <select class="form-control input-sm" v-model="form.type">
                 <option value="">Informe</option>
-                <option value="percent">Percentual</option>
+                <option value="percent" v-if="form.name === 'cc'">Percentual</option>
                 <option value="value">Valor</option>
               </select>
               <div class="message">{{ validation.firstError('form.type') }}</div>

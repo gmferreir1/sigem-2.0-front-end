@@ -3,16 +3,21 @@
   <div>
 
     <div class="row">
+
       <div class="col-md-6" style="width: 430px">
         <contract-celebrated-charts />
       </div>
 
-      <div class="col-md-6" style="width: 500px">
+      <div class="col-md-6" style="width: 490px">
         <contract-celebrated-status />
       </div>
 
-    </div>
 
+      <div class="col-md-6" style="width: 430px">
+        <p class="hidden-lg">&nbsp;</p>
+        <contract-inactivated />
+      </div>
+    </div>
 
   </div>
 
@@ -21,10 +26,12 @@
 <script>
 import ContractCelebratedCharts from '../components/charts/ContractCelebrated'
 import ContractCelebratedStatus from '../components/charts/ContractCelebratedStatus'
+import ContractInactivated from '../components/charts/ContractInactivated'
 export default {
   components: {
     ContractCelebratedCharts,
-    ContractCelebratedStatus
+    ContractCelebratedStatus,
+    ContractInactivated
   }
 }
 </script>

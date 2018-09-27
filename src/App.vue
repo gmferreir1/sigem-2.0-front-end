@@ -9,10 +9,6 @@
     <!-- / somente login -->
 
 
-    <!-- quick launch panel -->
-    <quick-lunch-panel v-if="show_template_parts"/>
-    <!-- /quick launch panel -->
-
     <div class="app layout-fixed-header" v-if="show_template_parts">
 
       <!-- sidebar panel -->
@@ -86,8 +82,6 @@
 </template>
 
 <script>
-
-import QuickLunchPanel from '@bundles/templateParts/QuickLunchPanel'
 import TopHeader from '@bundles/templateParts/TopHeader'
 import NavBar from '@bundles/templateParts/NavBar'
 import FooterPage from '@bundles/templateParts/FooterPage'
@@ -99,7 +93,6 @@ import {mapMutations} from 'vuex'
 export default {
   mixins: [notification],
   components: {
-    QuickLunchPanel,
     TopHeader,
     NavBar,
     FooterPage,

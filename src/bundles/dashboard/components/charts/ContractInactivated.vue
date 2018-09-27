@@ -20,11 +20,7 @@
 
     </div>
 
-    <div id="container" v-show="!not_show_graph" style="min-width: 310px; height: 400px; max-width: 500px"></div>
-
-    <div style="position: absolute; top: 40px; left: 20px" v-if="!load_data && !not_show_graph">
-      <button class="button btn btn-primary btn-sm" @click="getDataGraph">Alterar tipo meta para {{type_goal === 'percent' ? 'Valor' : 'Percentual'}}</button>
-    </div>
+    <div id="containerContractInactivated" v-show="!not_show_graph" style="min-width: 310px; height: 400px; max-width: 500px"></div>
 
   </div>
 
@@ -54,7 +50,7 @@ export default {
 
       const self = this
 
-      window.Highcharts.chart('container', {
+      window.Highcharts.chart('containerContractInactivated', {
         chart: {
           plotBackgroundColor: null,
           plotBorderWidth: 0,
@@ -67,10 +63,10 @@ export default {
           enabled: false
         },
         title: {
-          text: `<span style="font-size: 13px">Contratos Celebrados </span>
+          text: `<span style="font-size: 13px">Contratos Inativados </span>
                   <span style="font-weight: bold; color: #E98531">${self.wordUpper(self.month_data)}</span>
                  - <span style="font-size: 11px; color: red">META R$ ${moneyFormat(self.goal)}</span>
-                  <span style="font-size: 11px">(Mínimo)</span>`,
+                  <span style="font-size: 11px">(Máximo)</span>`,
           align: 'left'
         },
         tooltip: {
@@ -101,15 +97,7 @@ export default {
     },
     getDataGraph () {
 
-     this.type_goal = this.type_goal === 'percent' ? this.type_goal = 'value' :  this.type_goal = 'percent'
-
-      const queryParams = {
-        params: {
-          type_goal: this.type_goal
-        }
-      }
-
-      http.get('dashboard/data-graph/contracts-celebrated', queryParams).then(res => {
+      http.get('dashboard/data-graph/contracts-inactivated').then(res => {
 
         if (res.data.error) {
           const message = res.data.message
