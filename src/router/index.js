@@ -17,6 +17,7 @@ import SystemAdmin_Dashboard from '@bundles/systemAdmin/dashboard/page/Main'
 import SystemAdmin_User from '@bundles/systemAdmin/user/page/Main'
 import SystemAdmin_UpdateDatabase from '@bundles/systemAdmin/updateDatabase/page/Main'
 import SystemAdmin_Control_Letter from '@bundles/systemAdmin/controlLetter/page/Main'
+import SystemAdmin_Goals from '@bundles/systemAdmin/goals/page/Main'
 
 /*
  * Dashboard
@@ -180,6 +181,11 @@ const router = new Router({
           path: 'control-letter',
           name: 'systemAdmin.ControlLetter',
           component: SystemAdmin_Control_Letter
+        },
+        {
+          path: 'goals',
+          name: 'systemAdmin.Goals',
+          component: SystemAdmin_Goals
         }
       ]
     },

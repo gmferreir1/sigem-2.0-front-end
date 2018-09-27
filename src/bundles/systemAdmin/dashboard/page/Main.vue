@@ -53,6 +53,23 @@
       </router-link>
       <!-- / usuários registrados -->
 
+      <!-- metas do sistema -->
+      <router-link :to="{name: 'systemAdmin.Goals'}">
+        <div class="col-md-3">
+          <div class="widget bg-white">
+            <div class="widget-icon bg-orange pull-left fa fa-bar-chart-o"></div>
+            <div class="overflow-hidden">
+              <span class="widget-title">Metas</span>
+              <span class="widget-subtitle">
+                Metas do Sistema, Gráficos, etc ...
+              </span>
+            </div>
+            <br />
+          </div>
+        </div>
+      </router-link>
+      <!-- / metas do sistema -->
+
     </div>
 
   </div>
