@@ -3,11 +3,11 @@
   <div>
 
     <div class="row">
-      <div class="col-md-6">
+      <div class="col-md-6" style="width: 430px">
         <contract-celebrated-charts />
       </div>
 
-      <div class="col-md-6">
+      <div class="col-md-6" style="width: 500px">
         <contract-celebrated-status />
       </div>
 
