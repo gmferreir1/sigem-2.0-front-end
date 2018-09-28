@@ -41,7 +41,7 @@
 
 
         <!-- hidden md -->
-        <div class="col-md-2 hidden-md">
+        <div class="col-md-2 hidden-md" style="width: 100px">
           <button class="button btn btn-sm btn-primary" @click="filterData">Pesquisar</button>
         </div>
 

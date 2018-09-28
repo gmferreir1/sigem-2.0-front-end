@@ -47,24 +47,8 @@
               </a>
             </th>
 
-            <!-- hidden md -->
-            <th class="text-left hidden-md" style="width: 150px" title="Responsável pela inativação">
-              <a href="#" @click.prevent="sort('rp_per_inactive_name')">
-                <span v-if="sort_by == 'rp_per_inactive_name' ">
-                    <i class="fa" v-if="sort_by == 'rp_per_inactive_name'"
-                       :class="{'fa-sort-amount-desc': sort_order == false , 'fa-sort-amount-asc': sort_order == true}"
-                       aria-hidden="true">
-                    </i>
-                </span>
-                <span v-else>
-                    <i class="fa fa-sort" aria-hidden="true"></i>
-                </span>
-                Responsável
-              </a>
-            </th>
-
             <!-- hidden lg -->
-            <th class="text-left hidden-lg" style="width: 100px" title="Responsável pela inativação">
+            <th class="text-left" style="width: 100px" title="Responsável pela inativação">
               <a href="#" @click.prevent="sort('rp_per_inactive_name')">
                 <span v-if="sort_by == 'rp_per_inactive_name' ">
                     <i class="fa" v-if="sort_by == 'rp_per_inactive_name'"
@@ -147,7 +131,7 @@
 
 
             <th class="text-left hidden-lg" style="width: 50px">R/T</th>
-            <th class="text-left hidden-md" style="width: 100px">R/T</th>
+            <th class="text-left hidden-md" style="width: 80px">R/T</th>
 
 
             <th class="text-center" style="width: 100px">
@@ -166,14 +150,14 @@
             </th>
             <th class="text-center" style="width: 100px">Aluguel</th>
 
-            <th class="text-left hidden-md" style="width: 150px">Motivo</th>
+            <th class="text-left hidden-md" style="width: 100px">Motivo</th>
 
             <th class="text-left" style="width: 100px">Status</th>
             <th class="text-center" style="width: 80px">FIM</th>
             <th class="text-center" style="width: 50px">TMP</th>
-            <!-- hidden md -->
+            <!-- hidden md
             <th class="text-left hidden-md" style="width: 150px">Destino</th>
-
+            -->
             <th class="text-center" style="width: 100px"> - </th>
           </tr>
           </thead>
@@ -185,14 +169,7 @@
               </a>
             </td>
 
-            <!-- hidden lg -->
-            <td class="hidden-lg text-left" style="width: 100px">
-              <a href="#" @click.prevent="edit(list)">
-                {{ strLimit(wordUpper(list.rp_per_inactive_name), 8) }}
-              </a>
-            </td>
-            <!-- hidden md -->
-            <td class="hidden-md text-left" style="width: 150px">
+            <td class="text-left" style="width: 100px">
               <a href="#" @click.prevent="edit(list)">
                 {{ strLimit(wordUpper(list.rp_per_inactive_name), 10) }}
               </a>
@@ -232,7 +209,7 @@
               </a>
             </td>
             <!-- hidden md -->
-            <td class="hidden-md text-left" style="width: 100px" :title="list.type_register === 'termination' ? 'Rescisão' : 'Transferência'">
+            <td class="hidden-md text-left" style="width: 80px" :title="list.type_register === 'termination' ? 'Rescisão' : 'Transferência'">
               <a href="#" @click.prevent="edit(list)">
                 {{ strLimit(list.type_register === 'termination' ? 'Rescisão' : 'Transferência', 7) }}
               </a>
@@ -252,9 +229,9 @@
             </td>
 
             <!-- hidden md -->
-            <td class="hidden-md" style="width: 150px" :title="wordUpper(list.reason_name)">
+            <td class="hidden-md" style="width: 100px" :title="wordUpper(list.reason_name)">
               <a href="#" @click.prevent="edit(list)">
-                {{ strLimit(wordUpper(list.reason_name), 15) }}
+                {{ strLimit(wordUpper(list.reason_name), 8) }}
               </a>
             </td>
 
@@ -277,12 +254,14 @@
               </a>
             </td>
 
-            <!-- hidden md -->
+            <!-- hidden md
             <td class="text-left hidden-md" style="width: 150px" :title="wordUpper(list.destination_name)">
               <a href="#" @click.prevent="edit(list)">
                 {{ !list.destination_name ? ' - ' : strLimit(wordUpper(list.destination_name), 15) }}
               </a>
             </td>
+
+           -->
 
             <td class="text-center" style="width: 100px">
 
