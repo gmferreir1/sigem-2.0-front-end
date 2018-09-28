@@ -162,11 +162,7 @@ export default {
     }, false);
 
     */
-
-
-    $(window).bind("beforeunload", function() {
-      return confirm("Do you really want to close?");
-    })
+    
 
   }
 }
