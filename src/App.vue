@@ -141,6 +141,33 @@ export default {
     channel.bind('App\\Events\\SystemAction', () => {
 
     })
+
+
+
+    /*
+    window.addEventListener('load', function(e) {
+      if (navigator.onLine) {
+        console.log('We\'re online!');
+      } else {
+        console.log('We\'re offline...');
+      }
+    }, false);
+
+    window.addEventListener('online', function(e) {
+      console.log('And we\'re back :).');
+    }, false);
+
+    window.addEventListener('offline', function(e) {
+      console.log('Connection is down.');
+    }, false);
+
+    */
+
+
+    $(window).bind("beforeunload", function() {
+      return confirm("Do you really want to close?");
+    })
+
   }
 }
 </script>

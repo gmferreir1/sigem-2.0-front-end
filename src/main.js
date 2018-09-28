@@ -14,7 +14,7 @@ require('./assets_template')
 require('./assets')
 window._notification = require('./util/notification')
 
-window.URL_API = process.env.NODE_ENV === 'development' ? 'http://localhost:90' : 'http://10.0.10.95:86'
+window.URL_API = process.env.NODE_ENV === 'development' ? 'http://localhost:90' : 'http://10.0.10.112:90'
 
 window.http = require('@/util/http')
 
