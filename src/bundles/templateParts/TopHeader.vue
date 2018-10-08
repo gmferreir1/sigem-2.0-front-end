@@ -115,7 +115,7 @@
       </li>
 
       <li>
-        <a href="javascript:;" class="hamburger-icon v2" data-toggle="layout-chat-open">
+        <a href="javascript:;" class="hamburger-icon v2" data-toggle="layout-chat-open" @click.prevent="openPanelChat">
           <span></span>
           <span></span>
           <span></span>
@@ -128,6 +128,7 @@
 
 <script>
 import {wordUpper} from '@/util/stringHelpers'
+import {mapActions} from 'vuex'
 
 export default {
   data () {
@@ -138,10 +139,24 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Chat', ['getUsersChat']),
     wordUpper,
     logoutSystem () {
-      localStorage.clear()
-      window.location.href = '/'
+      // logout chat
+      this.chatLogout().then(res => {
+        localStorage.clear()
+        window.location.href = '/'
+      }).catch(() => {
+        localStorage.clear()
+        window.location.href = '/'
+      })
+    },
+    async chatLogout () {
+      try {
+        return await http.get('chat/transaction-actions/logout')
+      } catch (e) {
+        reject(e)
+      }
     },
     setImageProfile () {
       this.load_avatar = true
@@ -151,6 +166,17 @@ export default {
       setTimeout(() => {
         this.load_avatar = false
       }, 600)
+    },
+    openPanelChat () {
+
+      if (!$('.app').hasClass('layout-chat-open')) {
+        this.getUsersChat()
+      }
+
+      http.get('chat/transaction-actions/login').then(res => {
+
+      }).catch(() => {})
+
     }
   },
   computed: {

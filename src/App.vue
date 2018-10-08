@@ -85,7 +85,7 @@
 import TopHeader from '@bundles/templateParts/TopHeader'
 import NavBar from '@bundles/templateParts/NavBar'
 import FooterPage from '@bundles/templateParts/FooterPage'
-import RightMenu from '@bundles/templateParts/RightMenu'
+import RightMenu from '@bundles/chat/components/RightMenu'
 import ModalSicadiShowData from '@bundles/sicadi/components/ModalSicadiShowData'
 import {notification} from '@bundles/notification/mixins/notification'
 import {mapMutations} from 'vuex'
@@ -136,6 +136,7 @@ export default {
     }
   },
   mounted () {
+
     const channel = this.$pusher.subscribe('systemAction')
 
     channel.bind('App\\Events\\SystemAction', () => {
@@ -143,26 +144,19 @@ export default {
     })
 
 
+    setInterval(() => {
 
-    /*
-    window.addEventListener('load', function(e) {
-      if (navigator.onLine) {
-        console.log('We\'re online!');
-      } else {
-        console.log('We\'re offline...');
+      const dataUserLogged = JSON.parse(localStorage.getItem('dataUserLogged'))
+
+      if (dataUserLogged && dataUserLogged.id) {
+
+        http.get('chat/transaction-actions/interaction-user').then(res => {
+
+        }).catch(() => {})
+
       }
-    }, false);
 
-    window.addEventListener('online', function(e) {
-      console.log('And we\'re back :).');
-    }, false);
-
-    window.addEventListener('offline', function(e) {
-      console.log('Connection is down.');
-    }, false);
-
-    */
-
+    }, 300000)
 
   }
 }

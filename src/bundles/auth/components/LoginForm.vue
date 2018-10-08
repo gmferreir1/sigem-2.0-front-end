@@ -140,6 +140,9 @@
 
           localStorage.setItem('dataUserLogged', JSON.stringify(dataUserLogged))
 
+          // login no chat
+          this.chatLogin()
+
           setTimeout(() => {
             this.message_load = 'Login efetuado, carregando sistema ...'
             this.getUserLoggedData()
@@ -205,6 +208,13 @@
 
         }).catch(() => {
           this.load_data = false
+        })
+      },
+      chatLogin () {
+        http.get('chat/transaction-actions/login').then(res => {
+          return true
+        }).catch(() => {
+          return false
         })
       },
       reset () {

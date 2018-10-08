@@ -27,11 +27,18 @@
 import ContractCelebratedCharts from '../components/charts/ContractCelebrated'
 import ContractCelebratedStatus from '../components/charts/ContractCelebratedStatus'
 import ContractInactivated from '../components/charts/ContractInactivated'
+import {mapActions} from 'vuex'
 export default {
   components: {
     ContractCelebratedCharts,
     ContractCelebratedStatus,
     ContractInactivated
+  },
+  methods: {
+    ...mapActions('Chat', ['checkUsersOnline'])
+  },
+  mounted () {
+    this.checkUsersOnline()
   }
 }
 </script>

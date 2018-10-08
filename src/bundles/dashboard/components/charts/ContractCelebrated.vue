@@ -23,7 +23,7 @@
     <div id="container" v-show="!not_show_graph" style="min-width: 310px; height: 400px; max-width: 500px"></div>
 
     <div style="position: absolute; top: 40px; left: 20px" v-if="!load_data && !not_show_graph">
-      <button class="button btn btn-primary btn-sm" @click="getDataGraph">Alterar tipo meta para {{type_goal === 'percent' ? 'Valor' : 'Percentual'}}</button>
+      <button class="button btn btn-primary btn-sm" @click="getDataGraph">Alterar para {{type_goal === 'percent' ? 'Valor' : 'Percentual'}}</button>
     </div>
 
   </div>

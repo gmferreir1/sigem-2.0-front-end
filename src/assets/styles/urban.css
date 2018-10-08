@@ -1276,7 +1276,7 @@ footer.content-footer li a:active {
 }
 .chat-panel .chat-inner {
   width: 100%;
-  height: 100%;
+  height: 99%;
   position: relative;
   overflow: hidden;
 }
