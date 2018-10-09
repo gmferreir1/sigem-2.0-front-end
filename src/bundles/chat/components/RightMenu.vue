@@ -22,7 +22,7 @@
               </div>
               <a v-for="user in users.online" :title="wordUpper(user.name)" @click.prevent="openChatConversationPanel(user)">
                 <span class="status-online"></span>
-                <span>{{strLimit(wordUpper(user.name), 25)}} <span class="label label-danger">32</span> </span>
+                <span>{{strLimit(wordUpper(user.name), 25)}} <span class="label label-danger">{{user.qt}}</span> </span>
               </a>
             </div>
 
@@ -194,6 +194,8 @@ export default {
       const channel = this.$pusher.subscribe('refreshDataChat')
       channel.bind('App\\Events\\RefreshDataChat', (data) => {
 
+        this.getUsersChat()
+
         if (!$('#chat-panel').hasClass('conversation-open')) return
 
         if (data.params.to === this.user_id_select_to || data.params.in === this.user_id_select_to) {
@@ -216,12 +218,7 @@ export default {
               }
             }
 
-            this.getConversations(queryParams).then(res => {
-              // success
-            }).catch(() => {
-              // error
-            })
-
+            this.getConversations(queryParams).then(res => {}).catch(() => {})
 
           }).catch(() => {
             // error
