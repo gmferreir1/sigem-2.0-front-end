@@ -36,7 +36,10 @@
 
                   <p>
                     <a href="#" @click.prevent="(show_form_login = false), email_recovery = form.username">Esqueceu a senha?</a>
+
+                    <span style="float: right; font-weight: bold">versão: {{$systemVersion}}</span>
                   </p>
+
 
                 </div>
                 <!-- / form login -->
