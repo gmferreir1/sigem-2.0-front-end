@@ -111,6 +111,34 @@ Highcharts.setOptions({
   }
 })
 
+/*
+ * Time Ago
+ */
+window.timeago = require('timeago.js')
+
+const localeTimeAgo = function(number, index, total_sec) {
+  // number: the timeago / timein number;
+  // index: the index of array below;
+  // total_sec: total seconds between date to be formatted and today's date;
+  return [
+    ['agora mesmo', 'agora mesmo'],
+    ['%s seconds atras', 'em %s segundos'],
+    ['1 minuto atras', 'em 1 minuto'],
+    ['%s minutos atras', 'em %s minutos'],
+    ['1 hora atras', 'em 1 hora'],
+    ['%s horas atras', 'em %s horas'],
+    ['1 dias atras', 'em 1 dia'],
+    ['%s dias atras', 'em %s dias'],
+    ['1 semana atras', 'em 1 semana'],
+    ['%s semanas atras', 'em %s semanas'],
+    ['1 mês atras', 'em 1 mes'],
+    ['%s meses atras', 'em %s meses'],
+    ['1 ano atras', 'em 1 ano'],
+    ['%s anos atras', 'em %s anos']
+  ][index];
+};
+timeago.register('pt_BR', localeTimeAgo);
+
 
 /*
  * Pusher

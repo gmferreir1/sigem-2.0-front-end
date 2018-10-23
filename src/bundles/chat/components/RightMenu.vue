@@ -156,6 +156,14 @@ export default {
 
       http.post('chat/conversations', this.data_message_send).then((res) => {
         this.refreshData()
+
+
+        // chama o real time para mensagens de alerta do sistema
+        http.get(`system-alert/real-time/check-messages/${this.data_message_send.user_id_destination}`).then(res => {
+
+        }).catch(() => {})
+
+
       })
 
     },

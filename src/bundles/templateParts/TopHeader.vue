@@ -34,56 +34,34 @@
 
     <ul class="nav navbar-nav navbar-right hidden-xs">
 
-      <li>
-        <a href="javascript:;" data-toggle="dropdown">
+      <li id="panel_alert">
+        <a href="javascript:;" data-toggle="dropdown" @click="getAlerts(true)">
           <i class="fa fa-bell-o"></i>
-          <div class="status bg-danger border-danger animated bounce"></div>
+          <div class="bg-danger border-danger animated bounce" style="position: absolute; top: 2px; left: 25px; border-radius: 10px">
+            <span style="margin: 5px">{{messages.length}}</span>
+          </div>
         </a>
         <ul class="dropdown-menu notifications">
           <li class="notifications-header">
-            <p class="text-muted small">You have 3 new messages</p>
+            <p class="text-muted small">Você tem {{messages.length}} mensagens</p>
           </li>
           <li>
             <ul class="notifications-list">
-              <li>
+              <li v-for="message in messages.slice(0, 5)">
                 <a href="javascript:;">
-                      <span class="pull-left mt2 mr15">
-                                                <img src="images/avatar.jpg" class="avatar avatar-xs img-circle" alt="">
-                                            </span>
+                  <span class="pull-left mt2 mr15">
+                      <img :src="icons.notification" class="avatar avatar-xs img-circle" alt="">
+                  </span>
                   <div class="overflow-hidden">
-                    <span>Sean launched a new application</span>
-                    <span class="time">2 seconds ago</span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                  <div class="pull-left mt2 mr15">
-                    <div class="circle-icon bg-danger">
-                      <i class="fa fa-chain-broken"></i>
-                    </div>
-                  </div>
-                  <div class="overflow-hidden">
-                    <span>Removed chrome from app list</span>
-                    <span class="time">4 Hours ago</span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a href="javascript:;">
-                      <span class="pull-left mt2 mr15">
-                                                <img src="images/face3.jpg" class="avatar avatar-xs img-circle" alt="">
-                                            </span>
-                  <div class="overflow-hidden">
-                    <span class="text-muted">Jack Hunt has registered</span>
-                    <span class="time">9 hours ago</span>
+                    <span style="font-size: 11px">{{message.message}}</span>
+                    <span class="time">{{getTimeAgo(message.created_at)}}</span>
                   </div>
                 </a>
               </li>
             </ul>
           </li>
-          <li class="notifications-footer">
-            <a href="javascript:;">See all messages</a>
+          <li class="notifications-footer" v-if="messages.length">
+            <a href="javascript:;">Veja mais ...</a>
           </li>
         </ul>
       </li>
@@ -135,7 +113,11 @@ export default {
     return {
       image_profile: '',
       load_avatar: false,
-      spinner: require('@/assets/images/loading.gif')
+      spinner: require('@/assets/images/loading.gif'),
+      messages: [],
+      icons: {
+        notification: require('@icons/notification.png')
+      }
     }
   },
   methods: {
@@ -177,6 +159,43 @@ export default {
 
       }).catch(() => {})
 
+    },
+    getAlerts (read = false) {
+
+      //if ($('#panel_alert').hasClass('open') && force) return
+
+      const dataUserLogged = JSON.parse(localStorage.getItem('dataUserLogged'))
+
+      const queryParams = {
+        params: {
+          user_id: dataUserLogged.id,
+          only_read: false,
+          mark_read: read
+        }
+      }
+
+      http.get(`system-alert/find`, queryParams).then(res => {
+
+        this.messages = res.data
+
+      }).catch(() => { })
+    },
+    realTime () {
+
+      const channel = this.$pusher.subscribe('checkAlertSystem')
+      channel.bind('App\\Events\\CheckAlertSystem', (data) => {
+
+        if (!$('.app').hasClass('layout-chat-open')) {
+
+          this.messages = data.messages
+
+        }
+
+      })
+
+    },
+    getTimeAgo (date) {
+      return timeago(null, 'pt_BR').format(date)
     }
   },
   computed: {
@@ -191,6 +210,9 @@ export default {
     this.$bus.$on('TemplateParts\TopHeader:LoadAvatar', () => {
       this.setImageProfile()
     })
+
+    this.realTime()
+    this.getAlerts()
   }
 }
 </script>
