@@ -10,8 +10,7 @@
 
             <!-- buttons -->
             <button class="button btn btn-sm btn-danger" @click="submitForm"
-              :disabled="contract_edit_current.situation === 'as' || contract_edit_current.situation === 'ap'
-                      || contract_edit_current.situation === 'af' || contract_edit_current.situation === 'c'">Salvar Dados</button>
+              :disabled="contract_edit_current.situation === 'as' || contract_edit_current.situation === 'c'">Salvar Dados</button>
             <!-- / buttons -->
 
             <!-- botão envio de cartas -->

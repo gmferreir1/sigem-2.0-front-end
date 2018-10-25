@@ -77,12 +77,12 @@
         <label>Situação <span class="required">*</span></label>
         <select class="form-control input-sm" v-model="form.situation"
                 :disabled="!form.id">
-          <option value="r">Reserva</option>
-          <option value="d">Documentação</option>
-          <option value="a" >Análise</option>
-          <option value="cd" >Cadastro</option>
-          <option value="p" >Pendente</option>
-          <option value="as" >Assinado</option>
+          <option value="r" v-if="!hide_initials_status">Reserva</option>
+          <option value="d" v-if="!hide_initials_status">Documentação</option>
+          <option value="a" v-if="!hide_initials_status">Análise</option>
+          <option value="cd" v-if="!hide_initials_status">Cadastro</option>
+          <option value="p" v-if="!hide_initials_status">Pendente</option>
+          <option value="as">Assinado</option>
           <option value="ap">Ass. com Pendência</option>
           <option value="af">At. Finais</option>
           <option value="c">Cancelado</option>
@@ -415,7 +415,8 @@ export default {
       fields_after_assigned: false,
       images: {
         loading: require('@assets/images/loading.gif')
-      }
+      },
+      hide_initials_status: false
     }
   },
   validators: {
@@ -580,6 +581,7 @@ export default {
     },
     setForm (data) {
 
+      this.hide_initials_status = false
 
       this.form.immobile_code = data.immobile_code.toUpperCase()
       this.form.address = wordUpper(data.address)
@@ -590,6 +592,10 @@ export default {
 
       if (!data.id)
         setTimeout(() => $('#value_negotiated').focus(), 200)
+
+      if (data.situation === 'as' || data.situation === 'ap' || data.situation === 'af' || data.situation === 'c') {
+        this.hide_initials_status = true
+      }
 
       // somente edição
       this.form.id = data.id
