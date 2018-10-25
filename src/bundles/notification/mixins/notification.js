@@ -17,10 +17,27 @@ export const notification = {
       }
     },
     sendDesktopNotification (text) {
-      let notification = new Notification('Sistema de Gestão Master', {
-        icon: require('@icons/notification.png'),
-        body: this.notification.message
-      })
+
+      // verifica se o id_responsible da notificação é o mesmo do usuário logado
+
+      const dataUserLogged = localStorage.getItem('dataUserLogged')
+
+      if (dataUserLogged) {
+
+        if (JSON.parse(dataUserLogged).id != this.notification.id_responsible) {
+          return
+        }
+
+
+        let notification = new Notification('Sistema de Gestão Master', {
+          icon: require('@icons/notification.png'),
+          body: this.notification.message
+        })
+
+
+      }
+
+
     }
   },
   computed: {

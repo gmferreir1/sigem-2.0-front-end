@@ -122,6 +122,7 @@ export default {
   },
   methods: {
     ...mapActions('Chat', ['getUsersChat']),
+    ...mapActions('Notification', ['setNotification']),
     wordUpper,
     logoutSystem () {
       // logout chat
@@ -151,18 +152,13 @@ export default {
     },
     openPanelChat () {
 
-      if (!$('.app').hasClass('layout-chat-open')) {
-        this.getUsersChat()
-      }
+      this.$bus.$emit('chatPanelOpened')
 
       http.get('chat/transaction-actions/login').then(res => {
 
       }).catch(() => {})
-
     },
     getAlerts (read = false) {
-
-      //if ($('#panel_alert').hasClass('open') && force) return
 
       const dataUserLogged = JSON.parse(localStorage.getItem('dataUserLogged'))
 
@@ -185,7 +181,24 @@ export default {
       const channel = this.$pusher.subscribe('checkAlertSystem')
       channel.bind('App\\Events\\CheckAlertSystem', (data) => {
 
+
         if (!$('.app').hasClass('layout-chat-open')) {
+
+          const dataUserLogged = JSON.parse(localStorage.getItem('dataUserLogged'))
+          const arrayLength = data.messages.length
+
+          if (arrayLength) {
+
+            if (dataUserLogged) {
+
+              if (dataUserLogged.id === data.messages[arrayLength - 1].responsible) {
+                const message = arrayLength === 1 ? 'Voce possui uma nova  mensagem do chat' : 'Você possui novas mensagens do chat'
+                this.setNotification({id_responsible: data.messages[arrayLength - 1].responsible, message: message})
+              }
+
+            }
+
+          }
 
           this.messages = data.messages
 
@@ -213,6 +226,7 @@ export default {
 
     this.realTime()
     this.getAlerts()
+    this.getUsersChat()
   }
 }
 </script>

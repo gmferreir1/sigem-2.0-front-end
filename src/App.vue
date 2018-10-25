@@ -106,7 +106,7 @@ export default {
     }
   },
   methods: {
-    ...mapMutations('Notification', ['SET_NOTIFICATION']),
+    ...mapMutations('Notification', ['SET_NOTIFICATION'])
   },
   beforeMount() {
     this.show_template_parts = false
@@ -139,9 +139,7 @@ export default {
 
     const channel = this.$pusher.subscribe('systemAction')
 
-    channel.bind('App\\Events\\SystemAction', () => {
-
-    })
+    channel.bind('App\\Events\\SystemAction', () => {})
 
 
     setInterval(() => {

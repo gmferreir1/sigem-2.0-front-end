@@ -76,7 +76,7 @@
 
         </div>
 
-        <div class="chat-conversation-footer">
+        <div class="chat-conversation-footer" style="border-top: 1px solid #c8cbcf">
           <textarea class="chat-input" id="search" v-model="data_message_send.message"></textarea>
 
           <button class="chat-send" @click="sendMessage">
@@ -199,6 +199,7 @@ export default {
 
     },
     dataRealTime () {
+
       const channel = this.$pusher.subscribe('refreshDataChat')
       channel.bind('App\\Events\\RefreshDataChat', (data) => {
 
@@ -344,6 +345,12 @@ export default {
       self.input_qt_check = this.value.length
     }, 600))
 
+
+    this.$bus.$on('chatPanelOpened', () => {
+
+      $('#chat-panel').removeClass('conversation-open')
+
+    })
   }
 }
 </script>
