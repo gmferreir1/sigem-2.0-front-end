@@ -29,11 +29,14 @@ export const notification = {
         }
 
 
-        let notification = new Notification('Sistema de Gestão Master', {
-          icon: require('@icons/notification.png'),
-          body: this.notification.message
-        })
-
+        if(window.Notification && Notification.permission !== 'denied') {
+          Notification.requestPermission(function(status) {
+            var n = new Notification('Sistema de Gestão Master', {
+              icon: require('@icons/notification.png'),
+              body: this.notification.message
+            });
+          });
+        }
 
       }
 
