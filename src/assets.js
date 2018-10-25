@@ -85,18 +85,6 @@ numeral.locale('pt-br')
 
 
 /*
- * Froala Editor
- */
-require('../node_modules/froala-editor/js/froala_editor.pkgd.min')
-require('../node_modules/froala-editor/js/languages/pt_br')
-require('../node_modules/froala-editor/css/froala_editor.pkgd.min.css')
-require('../node_modules/font-awesome/css/font-awesome.css')
-require('../node_modules/froala-editor/css/froala_style.min.css')
-import VueFroala from 'vue-froala-wysiwyg'
-Vue.use(VueFroala)
-
-
-/*
  * HighCharts
  */
 window.Highcharts = require('highcharts')

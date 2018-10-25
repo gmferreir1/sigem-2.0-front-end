@@ -1,26 +1,26 @@
 <template>
   <div id="app">
-    <froala :tag="'textarea'" :config="config" v-model="text_editor"></froala>
+    <vue-editor v-model="text_editor" :editorToolbar="customToolbar" placeholder="Escreva aqui ..."></vue-editor>
   </div>
 </template>
 
 <script>
+import { VueEditor } from "vue2-editor";
 export default {
   props: ['setText'],
   name: 'app',
+  components: {
+    VueEditor
+  },
   data () {
     return {
-      config: {
-        language: 'pt_br',
-        events: {
-          'froalaEditor.initialized': () => {
-            this.text_editor = ''
-          }
-        },
-        placeholderText: 'Escreva aqui...',
-        toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'color', 'fontSize', 'paragraphStyle', '|', 'align', 'formatOL', 'formatUL', 'undo', 'selectAll']
-      },
-      text_editor: ''
+      text_editor: '',
+      customToolbar: [
+        [{ header: [1, 2, false] }],
+        ['bold', 'italic', 'underline'],
+        [{ color: ['back', 'red', 'blue', 'yellow', 'Silver'] }],
+        [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }]
+      ]
     }
   },
   watch: {

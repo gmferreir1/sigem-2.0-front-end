@@ -32,10 +32,10 @@
     "toastr": "^2.1.4",
     "v-money": "^0.8.1",
     "vue": "^2.5.2",
-    "vue-froala-wysiwyg": "^2.8.4",
     "vue-pusher": "^0.2.1",
     "vue-router": "^3.0.1",
     "vue-the-mask": "^0.11.1",
+    "vue2-editor": "^2.6.6",
     "vuex": "^3.0.1"
   },
   "devDependencies": {
