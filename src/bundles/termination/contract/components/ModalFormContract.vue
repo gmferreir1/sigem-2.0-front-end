@@ -58,7 +58,7 @@
                         <button class="button btn btn-sm btn-warning"
                                 @click="showComponent"
                                 v-if="showButtonToggleComponent">{{button_name}}</button>
-                        <button class="button btn btn-sm btn-danger" @click="submitForm" :disabled="disabledButtonSave">Salvar Dados</button>
+                        <button class="button btn btn-sm btn-danger" @click="submitForm" :disabled="disabled_submit_button">Salvar Dados</button>
                       </slot>
                     </modal-header>
                     <!-- / modal footer -->
@@ -115,7 +115,8 @@ export default {
       show_component: 'form_contract',
       button_name: 'Acessórios Locação',
       data_modal_opened: {},
-      inactivation_data: {}
+      inactivation_data: {},
+      disabled_submit_button: false
     }
   },
   methods: {
@@ -187,6 +188,20 @@ export default {
       this.show_component = 'form_contract'
       this.button_name = 'Acessórios da Locação'
 
+
+      if (this.dataModal && this.dataModal.data && this.dataModal.data.status) {
+
+        const status = this.dataModal.data.status
+
+        if (status === 'c' || status === 'r' || status === 'a' || status === 'j' || status === 'cej') {
+          this.disabled_submit_button = true
+        } else {
+          this.disabled_submit_button = false
+        }
+
+      }
+
+
       this.data_modal_opened = {
         type_action: this.dataModal.type_action,
         data: this.dataModal.data
@@ -196,12 +211,6 @@ export default {
     }
   },
   computed: {
-    disabledButtonSave () {
-      if (this.dataModal && this.dataModal.data && this.dataModal.data.status != 'p') {
-        return true
-      }
-      return false
-    },
     showButtonToggleComponent () {
       if (this.dataModal && this.dataModal.data && this.dataModal.data.id) {
         return true

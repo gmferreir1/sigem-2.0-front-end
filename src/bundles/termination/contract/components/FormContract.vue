@@ -658,6 +658,7 @@ export default {
     edit (dataEdit) {
       dataEdit.immobile_type = this.wordUpper(dataEdit.immobile_type)
       dataEdit.termination_date = moment(dataEdit.termination_date).format('DD/MM/YYYY')
+      dataEdit.end_process = dataEdit.end_process ? moment(dataEdit.end_process).format('DD/MM/YYYY') : ''
 
       this.form = dataEdit
       this.form_before_update = Object.assign({}, dataEdit)
