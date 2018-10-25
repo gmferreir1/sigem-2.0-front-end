@@ -5,8 +5,6 @@
 </template>
 
 <script>
-import VueFroala from 'vue-froala-wysiwyg';
-
 export default {
   props: ['setText'],
   name: 'app',
