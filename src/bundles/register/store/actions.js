@@ -55,7 +55,7 @@ const getReserveContracts = async ({commit}, queryParams) => {
     return res
 
   } catch (e) {
-    return e
+    return reject(e)
   }
 }
 

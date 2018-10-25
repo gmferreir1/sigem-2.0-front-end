@@ -766,7 +766,13 @@ export default {
         }, 600)
       })
     },
-    update () {
+    update (confirmCancelReserve = false) {
+
+      // abre modal solicitando motivo do cancelamento
+      if (this.form.situation === 'c' && !confirmCancelReserve) {
+        this.$emit('openModalReasonCancelReserve', this.form)
+        return
+      }
 
       this.message_load = 'Processando sua solicitação, aguarde ...'
 
@@ -968,6 +974,14 @@ export default {
       this.form.financial_data = data
 
       this.update()
+    })
+
+
+    // confirma o cancelamento da reserva
+    this.$bus.$on('Register\Reserve:ConfirmCancelReserve', (data) => {
+      this.form.id_reason_cancel = data.id_reason_cancel
+      this.form.reason_cancel_detail = data.reason_cancel_detail
+      this.update(true)
     })
   }
 }

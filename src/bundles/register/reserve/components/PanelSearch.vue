@@ -8,7 +8,7 @@
 
         <div class="col-md-3">
           <input type="text" class="form-control input-sm" title="Pesquisa de dados: Contrato, Arquivo, Caixa"
-                 placeholder="Pesquisa de dados" v-model="filter.input_search">
+                 placeholder="Pesquisa de dados" v-model="filter.search" @keypress.enter="filterData">
         </div>
 
         <div class="col-md-2 col-lg-2" style="width: 125px">
@@ -71,7 +71,7 @@
 
         <!-- hidden lg -->
         <div class="col-md-2 hidden-lg" style="margin-top: 10px">
-          <button class="button btn btn-sm btn-primary">Pesquisar</button>
+          <button class="button btn btn-sm btn-primary" @click="filterData">Pesquisar</button>
         </div>
 
         <div class="hidden-lg" style="float: right; margin-top: 10px">
@@ -182,7 +182,8 @@ export default {
         search_for: 'r',
         print: false,
         sort_by: this.sortBy.sort_by,
-        sort_order: this.sortBy.sort_order
+        sort_order: this.sortBy.sort_order,
+        searchFields: 'contract:like;immobile_code:like;address:like;client_name:like'
       }
     }
   },
@@ -203,7 +204,11 @@ export default {
       const queryParams = {
         params: this.filter
       }
-      this.getReserveContracts(queryParams)
+      this.getReserveContracts(queryParams).then(res => {
+
+      }).catch(() => {
+        this.$bus.$emit('Register\Reserve:HideLoadingTableList')
+      })
     }
   },
   computed: {

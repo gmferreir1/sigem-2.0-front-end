@@ -475,6 +475,10 @@ export default {
       this.load_data = true
     })
 
+    this.$bus.$on('Register\Reserve:HideLoadingTableList', () => {
+      this.load_data = false
+    })
+
 
     this.$bus.$on('Register\Reserve:RefreshTableList', () => {
       this.getReserveContracts()

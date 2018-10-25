@@ -11,7 +11,8 @@
     <!-- modal formulário de reserva -->
     <modal-form-reserve :dataModal="data_modal_form_reserve"
       @openModalWarnClient="data => data_modal_warn_client = {data}"
-      @openModalSendLetters="data_contract => data_modal_send_letters = {data_contract}"/>
+      @openModalSendLetters="data_contract => data_modal_send_letters = {data_contract}"
+      @openModalReasonCancelReserve="data => data_modal_reason_cancel_reserve = {data}"/>
     <!-- modal formulário de reserva -->
 
     <!-- modal avisando o cliente que o codigo do imovel esta ativo a ponto tempo no sistema -->
@@ -50,6 +51,10 @@
     <modal-letter-data />
     <!-- / modal dados da carta -->
 
+    <!-- modal seleção do motivo para o cancelamento da reserva -->
+    <modal-reason-cancel-reserve :dataModal="data_modal_reason_cancel_reserve" />
+    <!-- / modal seleção do motivo para o cancelamento da reserva -->
+
   </div>
 
 </template>
@@ -66,6 +71,7 @@ import ModalSelectTypePrint from '../components/ModalSelectTypePrint'
 import ModalReasonCancel from '../components/reasonsCancel/ModalReasonCancel'
 import ModalSendLetters from '../components/ModalSendLetters'
 import ModalLetterData from '../components/ModalLetterData'
+import ModalReasonCancelReserve from '../components/ModalReasonCancelReserve'
 
 export default {
   components: {
@@ -79,7 +85,8 @@ export default {
     ModalSelectTypePrint,
     ModalReasonCancel,
     ModalSendLetters,
-    ModalLetterData
+    ModalLetterData,
+    ModalReasonCancelReserve
   },
   data () {
     return {
@@ -88,7 +95,8 @@ export default {
       data_modal_score_attendance: {},
       data_open_modal_select_type_print: {},
       data_modal_reason_cancel: {},
-      data_modal_send_letters: {}
+      data_modal_send_letters: {},
+      data_modal_reason_cancel_reserve: {}
     }
   }
 }

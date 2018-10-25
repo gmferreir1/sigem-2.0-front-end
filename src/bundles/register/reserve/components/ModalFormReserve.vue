@@ -32,7 +32,9 @@
 
           <div class="modal-body">
 
-            <form-reserve @openModalWarnClient="data => $emit('openModalWarnClient', data)"
+            <form-reserve
+              @openModalWarnClient="data => $emit('openModalWarnClient', data)"
+              @openModalReasonCancelReserve="data => $emit('openModalReasonCancelReserve', data)"
               :dataModalOpened="data_modal_opened"/>
 
           </div>
