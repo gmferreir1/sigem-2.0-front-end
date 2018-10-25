@@ -156,6 +156,8 @@ export default {
 
     }, 300000)
 
+
+    this.requestDesktopNotificationPermission()
   }
 }
 </script>
