@@ -20,7 +20,7 @@ export default {
           }
         },
         placeholderText: 'Escreva aqui...',
-        toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'fontSize', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'insertTable', 'insertHR', 'undo', 'selectAll']
+        toolbarButtons: ['bold', 'italic', 'underline', 'fontFamily', 'color', 'fontSize', 'paragraphStyle', '|', 'align', 'formatOL', 'formatUL', 'undo', 'selectAll']
       },
       text_editor: ''
     }

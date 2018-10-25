@@ -924,6 +924,8 @@ export default {
 
       this.cleanForm()
 
+      this.$bus.$emit('CleanHistoric')
+
       this.message_load = 'Carregando dados, aguarde ...'
       this.load_data = true
 
