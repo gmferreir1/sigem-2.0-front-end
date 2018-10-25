@@ -157,10 +157,12 @@ export default {
     }, 300000)
 
 
+    /*
     const dataUserLogged = JSON.parse(localStorage.getItem('dataUserLogged'))
     if (dataUserLogged) {
       this.requestDesktopNotificationPermission()
     }
+    */
 
   }
 }

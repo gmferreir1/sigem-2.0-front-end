@@ -26,6 +26,7 @@
     "moment": "^2.22.2",
     "numeral": "^2.0.6",
     "perfect-scrollbar": "^1.4.0",
+    "push.js": "^1.0.9",
     "pusher-js": "^4.2.2",
     "simple-vue-validator": "^0.15.1",
     "timeago.js": "^4.0.0-beta.1",

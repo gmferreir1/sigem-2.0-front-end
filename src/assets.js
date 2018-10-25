@@ -140,3 +140,6 @@ Vue.use(vuePuser, {
     encrypted: true,
   }
 })
+
+
+window.Push = require('push.js')

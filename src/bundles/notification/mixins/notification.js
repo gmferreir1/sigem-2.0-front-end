@@ -2,12 +2,15 @@ import {mapState} from 'vuex'
 export const notification = {
   methods: {
     requestDesktopNotificationPermission (){
-      if(Notification && Notification.permission === 'default') {
+
+      if(Notification && Notification.permission === 'denied') {
+
         Notification.requestPermission( (permission) => {
           if(!('permission' in Notification)) {
             Notification.permission = permission
           }
         })
+
       }
     },
     desktopNotification () {
@@ -16,7 +19,7 @@ export const notification = {
         this.sendDesktopNotification(text);
       }
     },
-    sendDesktopNotification (text) {
+    sendDesktopNotification () {
 
       // verifica se o id_responsible da notificação é o mesmo do usuário logado
 
@@ -29,6 +32,8 @@ export const notification = {
         }
 
 
+        /*
+
         if(window.Notification && Notification.permission !== 'denied') {
           Notification.requestPermission(function(status) {
             var n = new Notification('Sistema de Gestão Master', {
@@ -37,6 +42,18 @@ export const notification = {
             });
           });
         }
+
+        */
+
+        Push.create('Sistema de Gestão Master', {
+          body: this.notification.message,
+          icon: require('@icons/notification.png'),
+          timeout: 4000,
+          onClick: function () {
+            window.focus()
+            this.close()
+          }
+        })
 
       }
 
@@ -48,8 +65,8 @@ export const notification = {
   },
   watch: {
     notification () {
-      this.requestDesktopNotificationPermission()
-      this.desktopNotification()
+      // this.requestDesktopNotificationPermission()
+      this.sendDesktopNotification()
     }
   }
 }
