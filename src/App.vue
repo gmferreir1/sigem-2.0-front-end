@@ -164,6 +164,13 @@ export default {
     }
     */
 
+    Push.Permission.request(() => {
+      console.log('aceita')
+    }, () => {
+      console.log('negada')
+    })
+
+    console.log(Push.Permission.get())
   }
 }
 </script>
