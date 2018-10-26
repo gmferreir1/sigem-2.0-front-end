@@ -4,7 +4,7 @@ import router from './router'
 import store from './store'
 
 
-Vue.prototype.$systemVersion = '1.1.3'
+Vue.prototype.$systemVersion = '1.1.4'
 
 // Event Bus
 import EventBus from '@/plugins/event-bus'
