@@ -77,7 +77,7 @@
         </div>
 
         <div class="chat-conversation-footer" style="border-top: 1px solid #c8cbcf">
-          <textarea class="chat-input" id="search" v-model="data_message_send.message"></textarea>
+          <textarea class="chat-input" id="search" v-model="data_message_send.message" @keyup.enter="sendMessage"></textarea>
 
           <button class="chat-send" @click="sendMessage">
             <i class="fa fa-paper-plane"></i>
