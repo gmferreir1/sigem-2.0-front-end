@@ -155,7 +155,7 @@
 
      <div class="col-md-2" v-show="form.rent_again === 'y'" :class="{error: validation.hasError('form.destination_id'), 'has-error': validation.hasError('form.destination_id')}">
        <label>Destino <span class="required">*</span></label>
-       <select class="form-control chosen input-sm" data-placeholder="Informe o motivo" id="reason" style="height: 20px !important;" v-model="form.destination_id">
+       <select class="form-control chosen input-sm" data-placeholder="Informe o destino" id="destination" style="height: 20px !important;" v-model="form.destination_id">
          <option :value="destination.id" v-for="destination in select_destination_or_reason.destinations">{{wordUpper(destination.text)}}</option>
        </select>
        <div class="message">{{ validation.firstError('form.destination_id') }}</div>
@@ -414,6 +414,9 @@ export default {
     'form.reason_id': function (value) {
       return Validator.value(value).required('Obrigatório')
     },
+    'form.destination_id': function (value) {
+      return Validator.value(value).required('Obrigatório')
+    },
     'form.rent_again': function (value) {
       return Validator.value(value).required('Obrigatório')
     },
@@ -585,6 +588,10 @@ export default {
 
       $('#reason').on('change', function(evt, params) {
         self.form.reason_id =  params ? params.selected : ''
+      })
+
+      $('#destination').on('change', function(evt, params) {
+        self.form.destination_id =  params ? params.selected : ''
       })
 
       $('#rp_register_sector').on('change', function(evt, params) {
