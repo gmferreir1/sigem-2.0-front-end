@@ -18,7 +18,7 @@ export default {
       customToolbar: [
         [{ header: [1, 2, false] }],
         ['bold', 'italic', 'underline'],
-        [{ color: ['back', 'red', 'blue', 'yellow', 'Silver'] }],
+        [{ color: ['black', 'red', 'blue', 'yellow', 'Silver'] }],
         [{ align: '' }, { align: 'center' }, { align: 'right' }, { align: 'justify' }]
       ]
     }
